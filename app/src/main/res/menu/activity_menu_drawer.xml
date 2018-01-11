@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_planta"
+            android:icon="@drawable/ic_rowing_black"
+            android:title="Proxima Planta" />
+    </group>
+
+    <item android:title="Reportar">
+        <menu>
+            <item
+                android:id="@+id/nav_caldera"
+                android:icon="@drawable/ic_caldera"
+                android:title="Caldera" />
+            <item
+                android:id="@+id/nav_piping"
+                android:icon="@drawable/ic_piping"
+                android:title="Piping" />
+            <item
+                android:id="@+id/nav_turbina"
+                android:icon="@drawable/ic_turbina"
+                android:title="Turbina" />
+            <item
+                android:id="@+id/nav_estanque"
+                android:icon="@drawable/ic_estanque"
+                android:title="Estanque" />
+        </menu>
+    </item>
+
+    <item android:title="Config">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
+
+</menu>
