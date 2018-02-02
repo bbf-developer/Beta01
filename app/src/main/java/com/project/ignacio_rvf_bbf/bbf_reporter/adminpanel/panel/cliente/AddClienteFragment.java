@@ -1,4 +1,4 @@
-package com.project.ignacio_rvf_bbf.bbf_reporter.tableadapter.listener.popup.popup_cell;
+package com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.panel;
 
 import android.content.Context;
 import android.net.Uri;
@@ -13,12 +13,14 @@ import com.project.ignacio_rvf_bbf.bbf_reporter.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link PopupCellFragment.OnFragmentInteractionListener} interface
+ * {@link AddClienteFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link PopupCellFragment#newInstance} factory method to
+ * Use the {@link AddClienteFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PopupCellFragment extends Fragment {
+public class AddClienteFragment extends Fragment {
+    // TODO:FRAGMENT PARA GUARDAR NUEVO CLIENTE
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +32,7 @@ public class PopupCellFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public PopupCellFragment() {
+    public AddClienteFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +42,11 @@ public class PopupCellFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment PopupCellFragment.
+     * @return A new instance of fragment AddClienteFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PopupCellFragment newInstance(String param1, String param2) {
-        PopupCellFragment fragment = new PopupCellFragment();
+    public static AddClienteFragment newInstance(String param1, String param2) {
+        AddClienteFragment fragment = new AddClienteFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,7 +67,7 @@ public class PopupCellFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_popup_cell, container, false);
+        return inflater.inflate(R.layout.fragment_add_cliente, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
