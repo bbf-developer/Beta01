@@ -1,8 +1,10 @@
 package com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +14,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.project.ignacio_rvf_bbf.bbf_reporter.MenuActivity;
+import com.project.ignacio_rvf_bbf.bbf_reporter.R;
+import com.project.ignacio_rvf_bbf.bbf_reporter.SubHogarFragment;
+import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.panel.cliente.MainClienteFragment;
+import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.panel.cliente.equipo.MainEquipoFragment;
+import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.panel.cliente.personal.MainPersonalFragment;
 
 public class MainAdminActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,7 +44,7 @@ public class MainAdminActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -80,17 +90,36 @@ public class MainAdminActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_cliente) {
+            setTitle("Clientes");
+            MainClienteFragment rpf = new MainClienteFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main_admin, rpf)
+                    .commit();
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_equipo) {
+            setTitle("Equipo");
+            MainEquipoFragment rpf = new MainEquipoFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main_admin, rpf)
+                    .commit();
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_personal) {
+            setTitle("Personal");
+            MainPersonalFragment rpf = new MainPersonalFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main_admin, rpf)
+                    .commit();
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_caldera) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_norma) {
+
+        }  else if (id == R.id.nav_switch) {
+
+            Intent change = new Intent(MainAdminActivity.this,MenuActivity.class);
+            startActivity(change);
+            Toast.makeText(getApplicationContext(),"Switching....",Toast.LENGTH_LONG).show();
 
         }
 

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BBF-Reporte-master.iml" filepath="$PROJECT_DIR$/BBF-Reporte-master.iml" />
-      <module fileurl="file://C:\Users\Ignacio-RVF-BBF\AndroidStudioProjects\BBF-Reporte-master\BBF_Reporter.iml" filepath="C:\Users\Ignacio-RVF-BBF\AndroidStudioProjects\BBF-Reporte-master\BBF_Reporter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BBF-Reporte- etapa2.iml" filepath="$PROJECT_DIR$/BBF-Reporte- etapa2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tableview/tableview.iml" filepath="$PROJECT_DIR$/tableview/tableview.iml" />
     </modules>
   </component>
 </project>

@@ -1,5 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="350dp">
+
+    <TextView
+        android:id="@+id/textRazonsoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="20dp"
+        android:text="Nombre Cliente"
+        android:textSize="40dp" />
+
+    <TextView
+        android:id="@+id/textView96"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textRazonsoc"
+        android:layout_below="@+id/textRazonsoc"
+        android:layout_marginTop="22dp"
+        android:text="RUT" />
+
+    <TextView
+        android:id="@+id/textView63"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView96"
+        android:layout_below="@+id/textView96"
+        android:layout_marginTop="21dp"
+        android:text="Giro" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView63"
+        android:layout_below="@+id/textView63"
+        android:layout_marginTop="27dp"
+        android:text="Cod. Planta"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/textRut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView63"
+        android:layout_marginEnd="140dp"
+        android:layout_toStartOf="@+id/textView33"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textGiro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textRut"
+        android:layout_alignTop="@+id/textView63"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textCodplanta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textGiro"
+        android:layout_alignTop="@+id/textView24"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textPlanta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textRazonsoc"
+        android:layout_alignBottom="@+id/textRazonsoc"
+        android:layout_marginStart="28dp"
+        android:layout_toEndOf="@+id/textView33"
+        android:text="Planta"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textRut"
+        android:layout_alignBottom="@+id/textRut"
+        android:layout_centerHorizontal="true"
+        android:text="Direccion" />
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textGiro"
+        android:layout_alignBottom="@+id/textGiro"
+        android:layout_alignStart="@+id/textView33"
+        android:text="Contacto" />
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView35"
+        android:layout_alignTop="@+id/textCodplanta"
+        android:text="Mail" />
+
+    <TextView
+        android:id="@+id/textFono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/textMail"
+        android:layout_marginEnd="201dp"
+        android:layout_marginTop="14dp"
+        android:text="Fono"
+        android:textSize="15dp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#000"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textDireccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView33"
+        android:layout_alignBottom="@+id/textView33"
+        android:layout_alignStart="@+id/textPlanta"
+        android:layout_marginStart="97dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textContacto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView35"
+        android:layout_alignStart="@+id/textDireccion"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textContacto"
+        android:layout_alignTop="@+id/textView36"
+        android:text="TextView" />
 
 </RelativeLayout>

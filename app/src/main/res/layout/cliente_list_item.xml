@@ -1,6 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relative"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-</android.support.constraint.ConstraintLayout>
+<view
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:id="@+id/linearLayout">
+
+</view>
+
+    <TextView
+        android:id="@+id/textView16"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/linearLayout"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginTop="63dp"
+        android:text="RUT" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="126dp"
+        android:layout_toEndOf="@+id/textView16"
+         />
+
+    <TextView
+        android:id="@+id/tvRut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView21"
+        android:layout_alignStart="@+id/tvRazonsocial"
+         />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvRut"
+        android:layout_alignBottom="@+id/tvRut"
+        android:layout_marginStart="145dp"
+        android:layout_toEndOf="@+id/tvRazonsocial"
+        android:text="Dirección" />
+
+    <TextView
+        android:id="@+id/tvDireccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView19"
+        android:layout_alignEnd="@+id/linearLayout"
+        android:layout_marginEnd="67dp"
+         />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView16"
+        android:layout_below="@+id/textView16"
+        android:layout_marginTop="45dp"
+        android:text="Razón Social" />
+
+    <TextView
+        android:id="@+id/tvRazonsocial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView21"
+        android:layout_alignBottom="@+id/textView21"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@+id/textView17"
+       />
+    <TextView
+        android:id="@+id/textView23"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView19"
+        android:layout_alignTop="@+id/tvRazonsocial"
+        android:text="Contacto" />
+
+    <TextView
+        android:id="@+id/tvContacto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView23"
+        android:layout_alignBottom="@+id/textView23"
+        android:layout_alignStart="@+id/tvDireccion"
+         />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView21"
+        android:layout_below="@+id/textView21"
+        android:layout_marginTop="55dp"
+        android:text="Giro" />
+
+    <TextView
+        android:id="@+id/tvGiro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView25"
+        android:layout_alignBottom="@+id/textView25"
+        android:layout_alignStart="@+id/tvRazonsocial"
+         />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvGiro"
+        android:layout_alignBottom="@+id/tvGiro"
+        android:layout_alignStart="@+id/textView23"
+        android:text="Mail" />
+
+    <TextView
+        android:id="@+id/tvMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView27"
+        android:layout_alignBottom="@+id/textView27"
+        android:layout_alignStart="@+id/tvDireccion"
+        />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView25"
+        android:layout_below="@+id/textView25"
+        android:layout_marginTop="48dp"
+        android:text="Cod. Planta" />
+
+    <TextView
+        android:id="@+id/tvCodplanta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView30"
+        android:layout_alignBottom="@+id/textView30"
+        android:layout_alignStart="@+id/tvGiro"
+       />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvCodplanta"
+        android:layout_alignStart="@+id/textView27"
+        android:text="Fono" />
+
+    <TextView
+        android:id="@+id/tvFono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvMail"
+        android:layout_alignTop="@+id/textView32"
+         />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView30"
+        android:layout_below="@+id/textView30"
+        android:layout_marginTop="63dp"
+        android:text="Planta" />
+
+    <TextView
+        android:id="@+id/tvPlanta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView34"
+        android:layout_alignStart="@+id/tvCodplanta"
+         />
+
+    <Button
+        android:id="@+id/btnSupr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvPlanta"
+        android:layout_toEndOf="@+id/textView27"
+        android:text="Borrar Contacto"
+        android:textColor="#ff2626" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@android:color/black" />
+
+
+</RelativeLayout>

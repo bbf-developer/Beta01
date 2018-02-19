@@ -1,13 +1,155 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.project.ignacio_rvf_bbf.bbf_reporter.tableadapter.listener.popup.popup_cell.PopupCellFragment">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#e7e6e6"
+    android:orientation="vertical"
+    tools:context="com.project.ignacio_rvf_bbf.bbf_reporter.popup_medicion.PopupClickFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/putCellName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:layout_toStartOf="@+id/etProyeccion"
+            android:text="A"
+            android:textColor="#000000"
+            android:textSize="55dp" />
+
+        <TextView
+            android:id="@+id/tvMedicion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="100dp"
+            android:text="Medición" />
+
+        <EditText
+            android:id="@+id/etMedicion"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvMedicion"
+            android:layout_alignBottom="@+id/tvMedicion"
+            android:layout_alignStart="@+id/etValorNom"
+            android:hint="0.00"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/tvMedicionAnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="150dp"
+            android:text="Medición Anterior"
+
+            />
+
+        <EditText
+            android:id="@+id/etMedicionAnt"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvMedicionAnt"
+            android:inputType="numberDecimal"
+            android:hint="0.00"
+            android:layout_alignStart="@+id/etMedicion" />
+
+
+        <TextView
+            android:id="@+id/tvValorNom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="200dp"
+            android:text="Valor Nominal"
+
+            />
+
+        <EditText
+            android:id="@+id/etValorNom"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvValorNom"
+            android:layout_marginLeft="115dp"
+            android:inputType="numberDecimal"
+            android:hint="0.00"
+            android:layout_toRightOf="@id/tvValorNom" />
+
+        <TextView
+            android:id="@+id/tvEspesor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="250dp"
+            android:text="Espesor de retiro"
+
+            />
+
+        <EditText
+            android:id="@+id/etEspesor"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tvEspesor"
+            android:layout_marginLeft="96dp"
+            android:inputType="numberDecimal"
+            android:hint="0.00"
+            android:layout_toRightOf="@id/tvEspesor" />
+
+        <TextView
+            android:id="@+id/tvProyeccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="300dp"
+            android:text="Proyeccion en años"
+
+            />
+
+        <EditText
+            android:id="@+id/etProyeccion"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tvProyeccion"
+            android:layout_marginLeft="82dp"
+            android:layout_toRightOf="@id/tvProyeccion"
+            android:inputType="numberDecimal"
+            android:hint="0"
+            android:maxLength="1" />
+
+        <TextView
+            android:id="@+id/tvAños"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="300dp"
+            android:layout_toRightOf="@id/etProyeccion"
+            android:layout_marginRight="1dp"
+            android:text="Años"
+
+            />
+
+        <TextView
+            android:id="@+id/putCellNumber"
+            android:textSize="55dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/putCellName"
+            android:layout_toEndOf="@+id/putCellName"
+            android:layout_marginStart="15dp"
+            android:text="1"
+            android:textColor="#000000" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -4,9 +4,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 
 /**
@@ -18,6 +22,13 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class ProximaPlantaFragment extends Fragment {
+
+    RecyclerViewAdaptador adapter;
+
+    ArrayList<ProximoModelo> listaVisita;
+
+    RecyclerView recyclerViewProximo;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -64,8 +75,39 @@ public class ProximaPlantaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_proxima_planta, container, false);
+        View view = inflater.inflate(R.layout.fragment_proxima_planta, container, false);
+
+        //OLD
+        // recyclerViewProximo= view.findViewById(R.id.recyclerview);
+        // recyclerViewProximo.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        /***/
+        listaVisita = new ArrayList<>();
+        recyclerViewProximo = view.findViewById(R.id.recyclerview);
+        recyclerViewProximo.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        llenarLista();
+
+        RecyclerViewAdaptador adapter = new RecyclerViewAdaptador(listaVisita);
+        recyclerViewProximo.setAdapter(adapter);
+
+        recyclerViewProximo.setHasFixedSize(true);
+
+        /***/
+
+        return view;
     }
+
+    private void llenarLista() {
+        listaVisita.add(new ProximoModelo(1,"ARAUCO S.A.","Reparar Nariz de Toro","18-01-2018", R.drawable.arauco_logo));
+        listaVisita.add(new ProximoModelo(1,"COLBUN S.A.","Ispeccionar Tuberias","18-01-2018", R.drawable.colbun_logo));
+        listaVisita.add(new ProximoModelo(1,"ARAUCO S.A.","Reparar Caldera","18-01-2018",  R.drawable.arauco_logo));
+        listaVisita.add(new ProximoModelo(1,"COLBUN S.A.","Ispeccionar Caldera","18-01-2018",  R.drawable.colbun_logo));
+
+     }
+
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -74,16 +116,6 @@ public class ProximaPlantaFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
     @Override
     public void onDetach() {

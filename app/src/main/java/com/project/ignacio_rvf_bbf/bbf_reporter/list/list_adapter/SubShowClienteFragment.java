@@ -1,109 +1,121 @@
 package com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.project.ignacio_rvf_bbf.bbf_reporter.R;
+import com.project.ignacio_rvf_bbf.bbf_reporter.RepcalderaFrag;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SubShowClienteFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SubShowClienteFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+
 public class SubShowClienteFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    ArrayList<ShowPlanta> myList = new ArrayList<>();
 
-    private OnFragmentInteractionListener mListener;
+    private ListView newListView;
+    private DatabaseReference gDatabase;
+
+
+    //Shared Preferences Method
+    public static final String SHARED_PREF_TEXT = "prefshared";
+    public static final String KEY_TEXT1 ="param";
 
     public SubShowClienteFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SubShowClienteFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SubShowClienteFragment newInstance(String param1, String param2) {
-        SubShowClienteFragment fragment = new SubShowClienteFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        gDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sub_show_cliente, container, false);
+        View view = inflater.inflate(R.layout.fragment_sub_show_cliente, container, false);
+        newListView = view.findViewById(R.id.lvplanta);
+        final ArrayAdapter<ShowPlanta> arrayAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1, myList);
+        newListView.setAdapter(arrayAdapter);
+
+        gDatabase.child("cliente").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                ShowPlanta show  = dataSnapshot.getValue(ShowPlanta.class);
+                myList.add(show);
+                //ShowCliente key = dataSnapshot.getKey();
+                //mKeys.add(key);
+                arrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                // String data = dataSnapshot.getValue(String.class);
+                // String key = dataSnapshot.getKey();
+                // int index = mKeys.indexOf(key);
+                // arrayAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        newListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                //IMPLEMENTAR METODO SHARED PREFERENCES
+                ShowPlanta select = myList.get(i);
+                //bundle.putString();
+                SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREF_TEXT, 0);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(KEY_TEXT1, select.getNomplanta().toUpperCase());
+                editor.commit();
+
+                RepcalderaFrag rpf = new RepcalderaFrag();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.main_content, rpf)
+                        .commit();
+
+            }
+        });
+
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+
+
 }

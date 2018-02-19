@@ -1,13 +1,203 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.panel.AddClienteFragment">
+    android:layout_margin="1dp">
 
-    <!-- TODO: Update blank fragment layout -->
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="82dp"
+        android:text="RUT" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/etRut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_marginStart="75dp"
+        android:layout_toEndOf="@+id/textView8"
+        android:ems="10"
+        android:hint="11111111111-1"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_below="@+id/etRut"
+        android:layout_marginTop="33dp"
+        android:text="Razon Social" />
+
+    <EditText
+        android:id="@+id/etRazonsocial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView8"
+        android:layout_alignStart="@+id/etRut"
+        android:ems="10"
+        android:hint="Celulosa Arauco"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView8"
+        android:layout_below="@+id/etRazonsocial"
+        android:layout_marginTop="27dp"
+        android:text="Giro" />
+
+    <EditText
+        android:id="@+id/etGiro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView9"
+        android:layout_alignBottom="@+id/textView9"
+        android:layout_alignStart="@+id/etRazonsocial"
+        android:ems="10"
+        android:hint="Madera"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView9"
+        android:layout_below="@+id/etGiro"
+        android:layout_marginTop="25dp"
+        android:text="Cod. Planta" />
+
+    <EditText
+        android:id="@+id/etCodplanta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/etGiro"
+        android:layout_below="@+id/etGiro"
+        android:layout_marginTop="13dp"
+        android:ems="10"
+        android:hint="AAA-222"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView10"
+        android:layout_below="@+id/etCodplanta"
+        android:layout_marginTop="27dp"
+        android:text="Planta" />
+
+    <EditText
+        android:id="@+id/etNomplanta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView11"
+        android:layout_alignBottom="@+id/textView11"
+        android:layout_alignStart="@+id/etCodplanta"
+        android:ems="10"
+        android:hint="Horcones"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView11"
+        android:layout_below="@+id/etNomplanta"
+        android:layout_marginTop="32dp"
+        android:text="Dirección" />
+
+    <EditText
+        android:id="@+id/etDireccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView12"
+        android:layout_alignBottom="@+id/textView12"
+        android:layout_alignStart="@+id/etNomplanta"
+        android:ems="10"
+        android:hint="Los Mancos 321"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView12"
+        android:layout_below="@+id/etDireccion"
+        android:layout_marginTop="41dp"
+        android:text="Contacto" />
+
+    <EditText
+        android:id="@+id/etContacto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView13"
+        android:layout_alignBottom="@+id/textView13"
+        android:layout_alignStart="@+id/etDireccion"
+        android:ems="10"
+        android:hint="Juan Perez"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView13"
+        android:layout_below="@+id/etContacto"
+        android:layout_marginTop="40dp"
+        android:text="Mail" />
+
+    <EditText
+        android:id="@+id/etMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView14"
+        android:layout_alignStart="@+id/etContacto"
+        android:ems="10"
+        android:hint="juanperez@arauco.cl"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/etRut"
+        android:layout_alignBottom="@+id/etRut"
+        android:layout_marginStart="139dp"
+        android:layout_toEndOf="@+id/etRut"
+        android:text="Fono" />
+
+    <EditText
+        android:id="@+id/etFono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/etRut"
+        android:layout_alignBottom="@+id/etRut"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="68dp"
+        android:ems="10"
+        android:hint="9999999999999"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/etFono"
+        android:layout_below="@+id/etRazonsocial"
+        android:text="Guardar" />
+
+</RelativeLayout>
+</ScrollView>

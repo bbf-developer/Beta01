@@ -5,9 +5,11 @@
     tools:context="com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.SubShowClienteFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+        android:id="@+id/lvplanta"
+        />
 </FrameLayout>

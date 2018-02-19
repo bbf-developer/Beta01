@@ -1,109 +1,173 @@
-package com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.panel;
+package com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.panel.cliente;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.project.ignacio_rvf_bbf.bbf_reporter.R;
+import com.project.ignacio_rvf_bbf.bbf_reporter.SubHogarFragment;
+import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.firebaseConnAdmin.ClienteAdapter;
+import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.firebaseConnAdmin.ClienteTest;
+import com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowClienteFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MainClienteFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MainClienteFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class MainClienteFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private RecyclerView recyclerView;
+    private List<ClienteTest> result;
+    private ClienteAdapter adapter;
 
-    private OnFragmentInteractionListener mListener;
+    private FirebaseDatabase database;
+    private DatabaseReference reference;
 
-    public MainClienteFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MainClienteFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MainClienteFragment newInstance(String param1, String param2) {
-        MainClienteFragment fragment = new MainClienteFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private Button btn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_cliente, container, false);
-    }
+    View view = inflater.inflate(R.layout.fragment_main_cliente, container, false);
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    database = FirebaseDatabase.getInstance();
+    reference = database.getReference("cliente");
+
+    result = new ArrayList<>();
+
+    recyclerView = (RecyclerView) view.findViewById(R.id.rvcliente_list);
+    recyclerView.setHasFixedSize(true);
+
+    btn = view.findViewById(R.id.btnAddcliente);
+
+    LinearLayoutManager linear = new LinearLayoutManager(getActivity());
+    linear.setOrientation(LinearLayoutManager.VERTICAL);
+    recyclerView.setLayoutManager(linear);
+
+    //createResult();
+        updateList();
+
+    adapter = new ClienteAdapter(result);
+    recyclerView.setAdapter(adapter);
+
+    btn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            AddClienteFragment rpf = new AddClienteFragment();
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main_admin, rpf)
+                    .commit();
         }
+    });
+
+    return view;
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+    public boolean onContextItemSelected(MenuItem item) {
+
+        switch(item.getItemId()){
+            case 0:
+                removeCliente(item.getGroupId());
+                break;
+            case 1:
         }
+
+        return super.onContextItemSelected(item);
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+
+    /**
+     * RECYCLER TESTING
+     * */
+    /* private void createResult(){
+
+        for(int i=0; i<5;i++){
+            result.add(new ClienteTest("rut","razonsoc","giro","codplanta","planta","direccion","contacto","mail","555"));
+        }
+
+    }*/
+
+    private void updateList(){
+        reference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                result.add(dataSnapshot.getValue(ClienteTest.class));
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                ClienteTest cliente = dataSnapshot.getValue(ClienteTest.class);
+                int index = getItemIndex(cliente);
+                result.set(index, cliente);
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                ClienteTest cliente = dataSnapshot.getValue(ClienteTest.class);
+                int index = getItemIndex(cliente);
+                result.remove(index);
+                adapter.notifyItemRemoved(index);
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+     * Indexa o cuenta segun cantidad de keys que tiene la tabla
+     * ver más
+     * https://www.youtube.com/watch?v=PJTs8vZKlWw
+     * 19:56
+     * */
+     private int getItemIndex(ClienteTest cliente){
+        int index = -1;
+        for(int i=0; i < result.size(); i++){
+            if(result.get(i).id.equals(cliente.id)){
+                index = i;
+                break;
+              }
+             }
+             return index;
+        }
+
+     private void removeCliente(int position){
+         reference.child(result.get(position).id).removeValue();
+     }
+
+     private void changeCliente(int position){
+         ClienteTest cliente = result.get(position);
+
+     }
 }

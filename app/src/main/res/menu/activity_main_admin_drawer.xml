@@ -2,36 +2,69 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
     </group>
 
-    <item android:title="Communicate">
+      <item android:title="Panel Administrativo">
+          <menu>
+        <item
+            android:id="@+id/nav_cliente"
+            android:icon="@drawable/ic_add_cliente"
+            android:title="Cliente" />
+        <item
+            android:id="@+id/nav_equipo"
+            android:icon="@drawable/ic_queue_add_equipo"
+            android:title="Equipo" />
+        <item
+            android:id="@+id/nav_personal"
+            android:icon="@drawable/ic_assignment_add_personal"
+            android:title="Personal" />
+          </menu>
+      </item>
+
+    <group android:checkableBehavior="single">
+    </group>
+
+    <item android:title="Secundario">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_caldera"
+                android:icon="@drawable/ic_add_caldera"
+                android:title="Caldera" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_norma"
+                android:icon="@drawable/ic_add_norma"
+                android:title="Norma" />
+        </menu>
+    </item>
+
+    <item android:title="Gestión de Rendimiento en Tiempo Real">
+        <menu>
+            <item
+                android:id="@+id/nav_moncaldera"
+                android:icon="@drawable/ic_trending_monitor"
+                android:title="Estado Caldera" />
+
+        </menu>
+    </item>
+
+    <item android:title="Switch">
+      <menu>
+        <item
+            android:id="@+id/nav_switch"
+            android:icon="@drawable/ic_sync_switch_panel"
+            android:title="Switch Panel" />
+
+      </menu>
+    </item>
+
+    <item android:title="Logout">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_power_login"
+                android:title="Finalizar Sesion" />
+
         </menu>
     </item>
 

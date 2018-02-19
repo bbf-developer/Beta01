@@ -6,31 +6,24 @@
     android:layout_height="match_parent"
     tools:context="com.project.ignacio_rvf_bbf.bbf_reporter.LoginActivity">
 
-    <Button
-        android:id="@+id/loginbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="68dp"
-        android:text="Login" />
-
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/etMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/tvMail"
+        android:layout_below="@+id/tvMail"
+        android:layout_marginTop="18dp"
         android:ems="10"
         android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/etPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/loginbutton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="26dp"
+        android:layout_alignBaseline="@+id/etMail"
+        android:layout_alignBottom="@+id/etMail"
+        android:layout_marginStart="50dp"
+        android:layout_toEndOf="@+id/etMail"
         android:ems="10"
         android:inputType="textPassword" />
 
@@ -40,22 +33,64 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="51dp"
-        app:srcCompat="@drawable/bbfapp2" />
+        android:layout_marginTop="50dp"
+        app:srcCompat="@drawable/bbflogo2" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editText"
-        android:layout_alignStart="@+id/editText"
-        android:text="su e-mail" />
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="258dp"
+        android:textColor="#000000"
+        android:text="Ingrese e-mail"
+        android:textSize="20dp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editText2"
-        android:layout_alignStart="@+id/editText2"
-        android:text="Contraseña" />
+        android:layout_above="@+id/etMail"
+        android:layout_alignStart="@+id/etPassword"
+        android:text="Contraseña"
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btnIngresa"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+
+        android:layout_below="@+id/etMail"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="50dp"
+        android:layout_toEndOf="@+id/tvMail"
+        android:background="#b5ed8d"
+        android:drawablePadding="15dp"
+        android:drawableRight="@drawable/ic_power_login"
+        android:text="Ingresar" />
+
+    <Button
+        android:id="@+id/btnAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="48dp"
+        android:layout_toEndOf="@+id/etPassword"
+        android:text="ADMIN" />
+
+    <Button
+        android:id="@+id/loginbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnAdmin"
+        android:layout_below="@+id/btnAdmin"
+        android:layout_marginTop="26dp"
+        android:text="LOGIN" />
+
+
 </RelativeLayout>

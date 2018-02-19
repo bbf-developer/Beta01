@@ -31,16 +31,48 @@
         </menu>
     </item>
 
-    <item android:title="Config">
+    <group android:checkableBehavior="single">
+      </group>
+
+    <item android:title="Checkpoint">
+        <menu>
+            <item
+                android:id="@+id/nav_continue"
+                android:icon="@drawable/ic_fast_continue"
+                android:title="Continuar Matriz" />
+
+        </menu>
+    </item>
+
+
+    <item android:title="SGC">
+      <menu>
+          <item
+             android:id="@+id/nav_planificacion"
+             android:icon="@drawable/ic_report"
+             android:title="Nueva Planificación" />
+          <item
+              android:id="@+id/nav_actividad"
+              android:icon="@drawable/ic_activity"
+              android:title="Nueva Actividad" />
+
+          <item
+              android:id="@+id/nav_consulta"
+              android:icon="@drawable/ic_report_alert"
+              android:title="Ver Reportes" />
+      </menu>
+    </item>
+
+    <item android:title="Configuración">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
                 android:title="Share" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout_layout"
+                android:title="Logout" />
         </menu>
     </item>
 
