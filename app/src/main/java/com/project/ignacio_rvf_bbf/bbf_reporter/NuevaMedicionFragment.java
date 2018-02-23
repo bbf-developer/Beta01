@@ -35,10 +35,14 @@ import com.project.ignacio_rvf_bbf.bbf_reporter.popup_medicion.PopupClickFragmen
 
 import java.util.Calendar;
 
+import static com.project.ignacio_rvf_bbf.bbf_reporter.RepcalderaFrag.KEY_CALDERA;
+import static com.project.ignacio_rvf_bbf.bbf_reporter.RepcalderaFrag.SHARED_PREFS_CALDERA;
 import static com.project.ignacio_rvf_bbf.bbf_reporter.SubHogarFragment.KEY_TEXT_ZONA;
 import static com.project.ignacio_rvf_bbf.bbf_reporter.SubHogarFragment.SHARED_PREF_ZONA;
 import static com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowClienteFragment.KEY_TEXT;
 import static com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowClienteFragment.SHARED_PREFS_FILE;
+import static com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowPlantaFragment.KEY_LINEA;
+import static com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowPlantaFragment.SHARED_PREFS_LINEA;
 import static com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.SubShowClienteFragment.KEY_TEXT1;
 import static com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.SubShowClienteFragment.SHARED_PREF_TEXT;
 
@@ -61,9 +65,12 @@ public class NuevaMedicionFragment extends Fragment {
 
     private TextView paramFila1;
     private TextView paramCol;
+
     private TextView muestraCliente;
     private TextView muestraPlanta;
     private TextView muestraZona;
+    private TextView muestraTipo;
+    private TextView muestraLinea;
 
     private String changeParam1;
     private String changeParam2;
@@ -81,7 +88,8 @@ public class NuevaMedicionFragment extends Fragment {
     private String planta;
     private String caldera;
     private String zona;
-    private String zona2;
+    private String tipo;
+    private String linea;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -174,6 +182,18 @@ public class NuevaMedicionFragment extends Fragment {
         SharedPreferences sharedPreferences2 = getContext().getSharedPreferences(SHARED_PREF_ZONA,0);
         zona = sharedPreferences2.getString(KEY_TEXT_ZONA,"");
         muestraZona.setText(zona);
+
+        //MUESTRA TIPO SELECCION
+        muestraTipo = view.findViewById(R.id.textvTipo);
+        SharedPreferences sharedPreferences3 = getContext().getSharedPreferences(SHARED_PREFS_CALDERA, 0);
+        tipo = sharedPreferences3.getString(KEY_CALDERA, "");
+        muestraTipo.setText(tipo);
+
+        //MUESTRA LINEA SELECCIONADA
+        muestraLinea = view.findViewById(R.id.textvLinea);
+        SharedPreferences sharedPreferences4 = getContext().getSharedPreferences(SHARED_PREFS_LINEA, 0);
+        linea = sharedPreferences4.getString(KEY_LINEA,"");
+        muestraLinea.setText(linea);
 
         //PARAMETROS DE REFLEJO
         paramFila1 = (TextView) view.findViewById(R.id.paramFila);
@@ -339,7 +359,7 @@ public class NuevaMedicionFragment extends Fragment {
 
         //FALTA CONFIGURACION DE LA LETRA.
         CreaMedicion cm = new CreaMedicion(id,cliente1,planta1,zona1,limiteTubo, limiteCol);
-        databaseReference.child(fecha).child(cliente).child(planta).child(zona).setValue(cm);
+        databaseReference.child(fecha).child(cliente).child(planta).child(zona + linea).setValue(cm);
 
         if(!TextUtils.isEmpty(verificar) && !TextUtils.isEmpty(limiteCol)) {
             Bundle bundle = new Bundle();

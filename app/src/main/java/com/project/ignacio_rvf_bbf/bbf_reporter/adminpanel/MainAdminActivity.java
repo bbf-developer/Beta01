@@ -119,7 +119,7 @@ public class MainAdminActivity extends AppCompatActivity
 
             Intent change = new Intent(MainAdminActivity.this,MenuActivity.class);
             startActivity(change);
-            Toast.makeText(getApplicationContext(),"Switching....",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Switching....",Toast.LENGTH_SHORT).show();
 
         }
 

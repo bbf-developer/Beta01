@@ -1,8 +1,6 @@
 package com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.panel.cliente;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,12 +15,8 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.project.ignacio_rvf_bbf.bbf_reporter.LoginActivity;
 import com.project.ignacio_rvf_bbf.bbf_reporter.R;
-import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.firebaseConnAdmin.ClienteTest;
 import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.firebaseConnAdmin.ClienteUp;
-import com.project.ignacio_rvf_bbf.bbf_reporter.firebaseConn.infoAdapter.MedicionTest;
-import com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowClienteFragment;
 
 
 public class AddClienteFragment extends Fragment {
@@ -39,6 +33,7 @@ public class AddClienteFragment extends Fragment {
     private EditText txtContacto;
     private EditText txtMail;
     private EditText txtFono;
+    private EditText txtLinea;
 
     DatabaseReference databaseReference;
     ProgressBar progressBar;
@@ -59,17 +54,18 @@ public class AddClienteFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_cliente, container, false);
 
-        txtRut = view.findViewById(R.id.etRut);
-        txtRazonsocial = view.findViewById(R.id.etRazonsocial);
-        txtGiro = view.findViewById(R.id.etGiro);
-        txtCodplanta = view.findViewById(R.id.etCodplanta);
-        txtPlanta = view.findViewById(R.id.etNomplanta);
-        txtDireccion = view.findViewById(R.id.etDireccion);
-        txtContacto = view.findViewById(R.id.etContacto);
-        txtMail = view.findViewById(R.id.etMail);
-        txtFono = view.findViewById(R.id.etFono);
+        txtRut = view.findViewById(R.id.etextRut);
+        txtRazonsocial = view.findViewById(R.id.etextNombre);
+        txtGiro = view.findViewById(R.id.etextApellido);
+        txtCodplanta = view.findViewById(R.id.etextCategoria);
+        txtPlanta = view.findViewById(R.id.etextCelular);
+        txtDireccion = view.findViewById(R.id.etextDireccion);
+        txtContacto = view.findViewById(R.id.etextFono);
+        txtMail = view.findViewById(R.id.etextMail);
+        txtFono = view.findViewById(R.id.etextFono);
+        txtLinea = view.findViewById(R.id.etLinea);
 
-        btnGuardar = view.findViewById(R.id.btnGuardar);
+        btnGuardar = view.findViewById(R.id.btnPersonal);
         //progressBar = view.findViewById(R.id.add_progress);
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +88,7 @@ public class AddClienteFragment extends Fragment {
         String contacto = txtContacto.getText().toString().trim();
         String mail = txtMail.getText().toString().trim();
         String fono = txtFono.getText().toString().trim();
+        int linea = Integer.parseInt(txtLinea.getText().toString().trim());
 
         //TESTING UPLOAD DATA TO FIREBASE
         if(!TextUtils.isEmpty(rut)&& !TextUtils.isEmpty(razonsoc)&& !TextUtils.isEmpty(giro)&& !TextUtils.isEmpty(codplanta)&&
@@ -101,10 +98,10 @@ public class AddClienteFragment extends Fragment {
             String id = databaseReference.push().getKey();
 
             ClienteUp client = new ClienteUp(id, rut, razonsoc, giro, codplanta,
-                    nomplanta, direccion, contacto, mail, fono);
+                    nomplanta, direccion, contacto, mail, fono, linea);
 
             databaseReference.child(id).setValue(client);
-            showDialog();
+            //showDialog();
             Toast.makeText(getContext(), "Cliente Añadido",
                     Toast.LENGTH_SHORT).show();
 

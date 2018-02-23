@@ -16,11 +16,12 @@ public class ClienteUp {
     private String contacto;
     private String mail;
     private String fono;
+    private int linea;
 
     public ClienteUp(){  }
 
     public ClienteUp(String id, String rut, String razonsoc, String giro, String codplanta,
-                       String nomplanta, String direccion, String contacto, String mail, String fono) {
+                       String nomplanta, String direccion, String contacto, String mail, String fono, int linea) {
         this.id = id;
         this.rut = rut;
         this.razonsoc = razonsoc;
@@ -31,6 +32,7 @@ public class ClienteUp {
         this.contacto = contacto;
         this.mail = mail;
         this.fono = fono;
+        this.linea = linea;
     }
 
     public String getId() {
@@ -69,5 +71,5 @@ public class ClienteUp {
 
     public String getFono() { return fono; }
 
-
+    public int getLinea(){return linea;}
 }

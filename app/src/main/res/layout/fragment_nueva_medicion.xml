@@ -1,260 +1,297 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="1dp">
-
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true" >
 
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="Nueva Medición"
-        android:textSize="20dp" />
-
-    <TextView
-        android:id="@+id/tvPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView3"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="44dp"
-        android:text="Empresa" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/txtZona"
-        android:layout_alignBottom="@+id/txtZona"
-        android:layout_alignStart="@+id/tvPassword"
-        android:text="Planta" />
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:fillViewport="true">
 
 
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/btnNew"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="137dp"
+            android:layout_marginTop="18dp"
+            android:text="Nueva Medición"
+            android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView1"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="44dp"
-        android:text="1° Columna" />
+        <TextView
+            android:id="@+id/tvPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView3"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="24dp"
+            android:text="Empresa" />
 
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView4"
-        android:layout_below="@+id/textView4"
-        android:layout_marginTop="38dp"
-        android:text="Fila" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView5"
-        android:layout_below="@+id/textView5"
-        android:layout_marginTop="36dp"
-        android:text="2 Columna" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView6"
-        android:layout_below="@+id/textView6"
-        android:layout_marginTop="41dp"
-        android:text="N° Tubos" />
-
-    <TextView
-        android:id="@+id/editText5"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView4"
-        android:layout_alignBottom="@+id/textView4"
-        android:layout_alignEnd="@+id/textView3"
-        android:layout_marginEnd="15dp"
-        android:ems="10"
-        android:textSize="25dp"
-        android:textColor="#000000"
-        android:inputType="textPersonName"
-        android:text="A" />
-
-    <TextView
-        android:id="@+id/paramFila"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView5"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_alignStart="@+id/editText5"
-        android:autoText="false"
-        android:ems="10"
-        android:hint="-"
-        android:inputType="textPersonName"
-        android:textColor="#000000"
-        android:textSize="25dp" />
-
-    <TextView
-        android:id="@+id/paramCol"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView6"
-        android:layout_alignBottom="@+id/textView6"
-        android:layout_alignStart="@+id/paramFila"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textColor="#000000"
-        android:textSize="25dp"
-        android:hint="-" />
-
-    <EditText
-        android:id="@+id/editTubo"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView7"
-        android:layout_alignBottom="@+id/textView7"
-        android:layout_alignStart="@+id/paramCol"
-        android:ems="10"
-        android:hint="Max. 999"
-        android:inputType="number"
-        android:maxLength="3" />
-
-    <EditText
-        android:id="@+id/etxtCol1"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editText5"
-        android:layout_alignBottom="@+id/editText5"
-        android:layout_toEndOf="@+id/editText5"
-        android:ems="10"
-        android:hint="-"
-        android:maxLength="1"
-        android:inputType="textCapSentences"
-        android:textSize="25dp"
-
-         />
-
-    <EditText
-        android:id="@+id/etxtFila"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/paramFila"
-        android:layout_alignBottom="@+id/paramFila"
-        android:layout_alignStart="@+id/etxtCol1"
-        android:ems="10"
-        android:hint="-"
-        android:maxLength="1"
-        android:textAllCaps="true"
-        android:inputType="textCapSentences"
-        android:textSize="25dp"/>
-
-    <EditText
-        android:id="@+id/etxtCol2"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/paramCol"
-        android:layout_alignBottom="@+id/paramCol"
-        android:layout_alignStart="@+id/etxtFila"
-        android:ems="10"
-        android:hint="-"
-        android:inputType="textCapSentences"
-        android:textSize="25dp"
-        android:maxLength="1"/>
-
-    <Button
-        android:id="@+id/btnNew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editTubo"
-        android:layout_below="@+id/editTubo"
-        android:layout_marginTop="103dp"
-        android:text="Crear Nueva Medición" />
-
-    <TextView
-        android:id="@+id/txtZona"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/editText5"
-        android:layout_below="@+id/textvCliente"
-        android:layout_marginTop="14dp"
-        android:ems="10"
-        android:text="mostrar planta"
-        android:textColor="#000000" />
-
-    <TextView
-        android:id="@+id/textvCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tvPassword"
-        android:layout_alignBottom="@+id/tvPassword"
-        android:layout_alignStart="@+id/txtZona"
-        android:text="mostrar cliente"
-        android:textColor="#000000" />
-
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textvZona"
-        android:layout_alignBottom="@+id/textvZona"
-        android:layout_alignStart="@+id/textView1"
-        android:text="Zona" />
-
-    <TextView
-        android:id="@+id/textvZona"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/editText5"
-        android:layout_alignStart="@+id/editText5"
-        android:layout_marginBottom="5dp"
-        android:text="zona"
-        android:textColor="#000000" />
-
-    <TextView
-        android:id="@+id/textView22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView4"
-        android:layout_alignBottom="@+id/textView4"
-        android:layout_alignEnd="@+id/editText5"
-        android:text="-"
-        android:textColor="#000000"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/textView26"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView5"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_alignStart="@+id/textView22"
-        android:text="-"
-        android:textColor="#000000"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView6"
-        android:layout_alignBottom="@+id/textView6"
-        android:layout_alignStart="@+id/textView26"
-        android:text="-"
-        android:textColor="#000000"
-        android:textSize="15dp" />
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txtZona"
+            android:layout_alignBottom="@+id/txtZona"
+            android:layout_alignStart="@+id/tvPassword"
+            android:text="Planta" />
 
 
-</RelativeLayout>
-</ScrollView>
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView18"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="138dp"
+            android:text="1° Columna" />
+
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView4"
+            android:layout_below="@+id/etxtCol1"
+            android:layout_marginTop="26dp"
+            android:text="Fila" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView5"
+            android:layout_below="@+id/etxtFila"
+            android:layout_marginTop="24dp"
+            android:text="2 Columna" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/tvPassword"
+            android:layout_below="@+id/etxtCol2"
+            android:layout_marginTop="18dp"
+            android:text="N° Tubos" />
+
+        <TextView
+            android:id="@+id/editText5"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView4"
+            android:layout_alignBottom="@+id/textView4"
+            android:layout_alignEnd="@+id/textView3"
+            android:layout_marginEnd="15dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="A"
+            android:textColor="#000000"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/paramFila"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView5"
+            android:layout_alignBottom="@+id/textView5"
+            android:layout_alignStart="@+id/editText5"
+            android:autoText="false"
+            android:ems="10"
+            android:hint="-"
+            android:inputType="textPersonName"
+            android:textColor="#000000"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/paramCol"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView6"
+            android:layout_alignBottom="@+id/textView6"
+            android:layout_alignStart="@+id/paramFila"
+            android:ems="10"
+            android:hint="-"
+            android:inputType="textPersonName"
+            android:textColor="#000000"
+            android:textSize="25dp" />
+
+        <EditText
+            android:id="@+id/editTubo"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView7"
+            android:layout_alignBottom="@+id/textView7"
+            android:layout_alignStart="@+id/paramCol"
+            android:ems="10"
+            android:hint="Max. 999"
+            android:inputType="number"
+            android:maxLength="3" />
+
+        <EditText
+            android:id="@+id/etxtCol1"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editText5"
+            android:layout_alignBottom="@+id/editText5"
+            android:layout_toEndOf="@+id/editText5"
+            android:ems="10"
+            android:hint="-"
+            android:inputType="textCapSentences"
+            android:maxLength="1"
+            android:textSize="25dp"
+
+            />
+
+        <EditText
+            android:id="@+id/etxtFila"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/paramFila"
+            android:layout_alignBottom="@+id/paramFila"
+            android:layout_alignStart="@+id/etxtCol1"
+            android:ems="10"
+            android:hint="-"
+            android:inputType="textCapSentences"
+            android:maxLength="1"
+            android:textAllCaps="true"
+            android:textSize="25dp" />
+
+        <EditText
+            android:id="@+id/etxtCol2"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/paramCol"
+            android:layout_alignBottom="@+id/paramCol"
+            android:layout_alignStart="@+id/etxtFila"
+            android:ems="10"
+            android:hint="-"
+            android:inputType="textCapSentences"
+            android:maxLength="1"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/txtZona"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/editTubo"
+            android:layout_alignStart="@+id/textView3"
+            android:layout_below="@+id/textvCliente"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="23dp"
+            android:ems="10"
+            android:text="mostrar planta"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/textvCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvPassword"
+            android:layout_alignBottom="@+id/tvPassword"
+            android:layout_alignStart="@+id/txtZona"
+            android:text="mostrar cliente"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView1"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="13dp"
+            android:text="Zona" />
+
+        <TextView
+            android:id="@+id/textvZona"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView18"
+            android:layout_alignBottom="@+id/textView18"
+            android:layout_alignStart="@+id/txtZona"
+            android:text="mostrar zona"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView4"
+            android:layout_alignBottom="@+id/textView4"
+            android:layout_alignEnd="@+id/editText5"
+            android:text="-"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView5"
+            android:layout_alignBottom="@+id/textView5"
+            android:layout_alignStart="@+id/textView22"
+            android:text="-"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView6"
+            android:layout_alignBottom="@+id/textView6"
+            android:layout_alignStart="@+id/textView26"
+            android:text="-"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/btnNew"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTubo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="36dp"
+            android:text="Crear Nueva Medición" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView18"
+            android:layout_below="@+id/textvZona"
+            android:layout_marginTop="12dp"
+            android:text="Tipo" />
+
+        <TextView
+            android:id="@+id/textvTipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textvZona"
+            android:layout_alignTop="@+id/textView20"
+            android:text="mostrar tipo"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/textView40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/etxtCol1"
+            android:layout_alignStart="@+id/textView4"
+            android:text="Linea"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/textvLinea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/etxtCol1"
+            android:layout_alignStart="@+id/textvTipo"
+            android:text="1 o 2"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+
+    </RelativeLayout>
+
+

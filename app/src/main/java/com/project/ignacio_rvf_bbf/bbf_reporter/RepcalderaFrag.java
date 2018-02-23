@@ -1,6 +1,7 @@
 package com.project.ignacio_rvf_bbf.bbf_reporter;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -32,6 +33,9 @@ public class RepcalderaFrag extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    //TODO:SHARED PREFS DATA
+    public static final String SHARED_PREFS_CALDERA = "tipoCald";
+    public static final String KEY_CALDERA = "KEY_CALDERA";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -121,13 +125,19 @@ public class RepcalderaFrag extends Fragment {
                             .commit();
                 }
 
+                //SETTING INTO SHARED GROUP NAME
+                ChildInfo info = deptlist.get(groupPosition);
+
+                SharedPreferences sharedPref3 = getContext().getSharedPreferences(SHARED_PREFS_CALDERA, 0);
+                SharedPreferences.Editor editor = sharedPref3.edit();
+                editor.putString(KEY_CALDERA, info.getName().toUpperCase());
+                editor.commit();
+
                 return false;
             }
 
 
         });
-
-
 
         return view;
     }
@@ -157,9 +167,12 @@ public class RepcalderaFrag extends Fragment {
         addProduct("Poder","");
 
     }
+
     /**
      * Main del Expandable List View
+     *
      * */
+
     private int addProduct(String brand, String Car){
         int groupPosition;
         ArrayList<ChildInfo> arrayList;
@@ -169,6 +182,7 @@ public class RepcalderaFrag extends Fragment {
             headerinfo.setName(brand);
             childlist.put(brand,headerinfo);
             deptlist.add(headerinfo);
+
         }
 
         ArrayList<GroupInfo> grouplist = headerinfo.getList();

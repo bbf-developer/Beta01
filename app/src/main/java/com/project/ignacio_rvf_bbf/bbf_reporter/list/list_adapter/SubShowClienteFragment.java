@@ -55,10 +55,12 @@ public class SubShowClienteFragment extends Fragment {
         final ArrayAdapter<ShowPlanta> arrayAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1, myList);
         newListView.setAdapter(arrayAdapter);
 
+        //TIENE QUE SER LA CONSULTA DE 1 SOLO PARAMETRO EN LISTENER.
         gDatabase.child("cliente").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 ShowPlanta show  = dataSnapshot.getValue(ShowPlanta.class);
+                //El Array solo crea get para 1 elemento
                 myList.add(show);
                 //ShowCliente key = dataSnapshot.getKey();
                 //mKeys.add(key);
@@ -112,10 +114,5 @@ public class SubShowClienteFragment extends Fragment {
 
         return view;
     }
-
-
-
-
-
 
 }

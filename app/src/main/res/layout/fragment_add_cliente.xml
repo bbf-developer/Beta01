@@ -17,10 +17,11 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="57dp"
         android:layout_marginTop="82dp"
-        android:text="RUT" />
+        android:text="RUT"
+        android:textColor="#000000" />
 
     <EditText
-        android:id="@+id/etRut"
+        android:id="@+id/etextRut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView2"
@@ -36,16 +37,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView2"
-        android:layout_below="@+id/etRut"
+        android:layout_below="@+id/etextRut"
         android:layout_marginTop="33dp"
+        android:textColor="#000000"
         android:text="Razon Social" />
 
     <EditText
-        android:id="@+id/etRazonsocial"
+        android:id="@+id/etextNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView8"
-        android:layout_alignStart="@+id/etRut"
+        android:layout_alignStart="@+id/etextRut"
         android:ems="10"
         android:hint="Celulosa Arauco"
         android:inputType="textPersonName" />
@@ -55,17 +57,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView8"
-        android:layout_below="@+id/etRazonsocial"
+        android:layout_below="@+id/etextNombre"
         android:layout_marginTop="27dp"
+        android:textColor="#000000"
         android:text="Giro" />
 
     <EditText
-        android:id="@+id/etGiro"
+        android:id="@+id/etextApellido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView9"
         android:layout_alignBottom="@+id/textView9"
-        android:layout_alignStart="@+id/etRazonsocial"
+        android:layout_alignStart="@+id/etextNombre"
         android:ems="10"
         android:hint="Madera"
         android:inputType="textPersonName" />
@@ -75,16 +78,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView9"
-        android:layout_below="@+id/etGiro"
+        android:layout_below="@+id/etextApellido"
         android:layout_marginTop="25dp"
+        android:textColor="#000000"
         android:text="Cod. Planta" />
 
     <EditText
-        android:id="@+id/etCodplanta"
+        android:id="@+id/etextCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/etGiro"
-        android:layout_below="@+id/etGiro"
+        android:layout_alignEnd="@+id/etextApellido"
+        android:layout_below="@+id/etextApellido"
         android:layout_marginTop="13dp"
         android:ems="10"
         android:hint="AAA-222"
@@ -95,17 +99,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView10"
-        android:layout_below="@+id/etCodplanta"
+        android:layout_below="@+id/etextCategoria"
         android:layout_marginTop="27dp"
+        android:textColor="#000000"
         android:text="Planta" />
 
     <EditText
-        android:id="@+id/etNomplanta"
+        android:id="@+id/etextCelular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView11"
         android:layout_alignBottom="@+id/textView11"
-        android:layout_alignStart="@+id/etCodplanta"
+        android:layout_alignStart="@+id/etextCategoria"
         android:ems="10"
         android:hint="Horcones"
         android:inputType="textPersonName" />
@@ -115,17 +120,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView11"
-        android:layout_below="@+id/etNomplanta"
+        android:layout_below="@+id/etextCelular"
         android:layout_marginTop="32dp"
+        android:textColor="#000000"
         android:text="Dirección" />
 
     <EditText
-        android:id="@+id/etDireccion"
+        android:id="@+id/etextDireccion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView12"
         android:layout_alignBottom="@+id/textView12"
-        android:layout_alignStart="@+id/etNomplanta"
+        android:layout_alignStart="@+id/etextCelular"
         android:ems="10"
         android:hint="Los Mancos 321"
         android:inputType="textPersonName" />
@@ -135,17 +141,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView12"
-        android:layout_below="@+id/etDireccion"
+        android:layout_below="@+id/etextDireccion"
         android:layout_marginTop="41dp"
+        android:textColor="#000000"
         android:text="Contacto" />
 
     <EditText
-        android:id="@+id/etContacto"
+        android:id="@+id/etextFono"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView13"
         android:layout_alignBottom="@+id/textView13"
-        android:layout_alignStart="@+id/etDireccion"
+        android:layout_alignStart="@+id/etextDireccion"
         android:ems="10"
         android:hint="Juan Perez"
         android:inputType="textPersonName" />
@@ -155,16 +162,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView13"
-        android:layout_below="@+id/etContacto"
+        android:layout_below="@+id/etextFono"
         android:layout_marginTop="40dp"
+        android:textColor="#000000"
         android:text="Mail" />
 
     <EditText
-        android:id="@+id/etMail"
+        android:id="@+id/etextMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView14"
-        android:layout_alignStart="@+id/etContacto"
+        android:layout_alignStart="@+id/etextFono"
         android:ems="10"
         android:hint="juanperez@arauco.cl"
         android:inputType="textEmailAddress" />
@@ -173,18 +181,19 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/etRut"
-        android:layout_alignBottom="@+id/etRut"
+        android:layout_alignBaseline="@+id/etextRut"
+        android:layout_alignBottom="@+id/etextRut"
         android:layout_marginStart="139dp"
-        android:layout_toEndOf="@+id/etRut"
+        android:layout_toEndOf="@+id/etextRut"
+        android:textColor="#000000"
         android:text="Fono" />
 
     <EditText
-        android:id="@+id/etFono"
+        android:id="@+id/etextFono"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/etRut"
-        android:layout_alignBottom="@+id/etRut"
+        android:layout_alignBaseline="@+id/etextRut"
+        android:layout_alignBottom="@+id/etextRut"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="68dp"
         android:ems="10"
@@ -192,12 +201,32 @@
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/btnGuardar"
+        android:id="@+id/btnPersonal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/etFono"
-        android:layout_below="@+id/etRazonsocial"
+        android:layout_alignStart="@+id/etextFono"
+        android:layout_below="@+id/textView10"
         android:text="Guardar" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView9"
+        android:layout_alignStart="@+id/textView15"
+        android:textColor="#000000"
+        android:text="Cantidad Linea" />
+
+    <EditText
+        android:id="@+id/etLinea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/etextApellido"
+        android:layout_alignStart="@+id/etextFono"
+        android:ems="10"
+        android:maxLength="1"
+        android:hint="1 o 2 o 3"
+        android:inputType="number" />
 
 </RelativeLayout>
 </ScrollView>

@@ -29,6 +29,7 @@ import com.project.ignacio_rvf_bbf.bbf_reporter.NuevaMedicionFragment;
 import com.project.ignacio_rvf_bbf.bbf_reporter.R;
 import com.project.ignacio_rvf_bbf.bbf_reporter.RepcalderaFrag;
 import com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.ShowCliente;
+import com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.ShowPlanta;
 import com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.SubShowClienteFragment;
 
 import java.util.ArrayList;
@@ -58,15 +59,11 @@ public class ShowClienteFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-
            gDatabase = FirebaseDatabase.getInstance().getReference();
-
     }
 
     @Override
@@ -124,7 +121,7 @@ public class ShowClienteFragment extends Fragment {
             editor.putString(KEY_TEXT, select.getRazonsoc().toUpperCase());
             editor.commit();
 
-            SubShowClienteFragment rpf = new SubShowClienteFragment();
+            ShowPlantaFragment rpf = new ShowPlantaFragment();
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.main_content, rpf)
                     .commit();

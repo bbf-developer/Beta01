@@ -42,10 +42,11 @@ public class CellViewHolder extends AbstractViewHolder{
         cell_container = itemView.findViewById(R.id.cell_container);
     }
 
-    /*MODIFICA LAS CELDAS CREADAS*/
+    /*Marca celda clickeada*/
     @Override
     public void setSelected(SelectionState p_nSelectionState){
         super.setSelected(p_nSelectionState);
+
 
         if(p_nSelectionState == SelectionState.SELECTED) {
             cell_textview.setTextColor(ContextCompat.getColor(cell_textview.getContext(), R.color.cell_background_color));
@@ -58,6 +59,7 @@ public class CellViewHolder extends AbstractViewHolder{
         }
 
         if(p_nSelectionState != SelectionState.UNSELECTED){
+
             cell_textview.setText("CHK");
         }
 

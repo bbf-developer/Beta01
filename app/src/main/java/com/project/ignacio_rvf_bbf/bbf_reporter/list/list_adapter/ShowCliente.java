@@ -6,7 +6,6 @@ package com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter;
 
 public class ShowCliente {
 
-
     private String razonsoc;
 
     private String planta;
@@ -31,8 +30,6 @@ public class ShowCliente {
     public String toString(){
         return razonsoc.toUpperCase();
     }
-
-
 
 
 }

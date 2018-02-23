@@ -16,6 +16,7 @@ import android.view.View;
 
 import com.project.ignacio_rvf_bbf.bbf_reporter.checkpointer.ContinueFragment;
 import com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowClienteFragment;
+import com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowPlantaFragment;
 
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -125,12 +126,19 @@ public class MenuActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_continue) {
             //DIRIGE A UN LISTVIEW CON LA TABLA QUE SE ESTA TRABAJANDO
+
+            setTitle("Continuar Matriz");
+            ShowPlantaFragment rpf = new ShowPlantaFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.main_content, rpf)
+                    .commit();
+            /*
             setTitle("Continuar Matriz");
             ContinueFragment rpf = new ContinueFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.main_content, rpf)
                     .commit();
-
+            */
         } else if (id == R.id.nav_planificacion) {
 
 

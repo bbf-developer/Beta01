@@ -19,22 +19,30 @@
             android:id="@+id/nav_personal"
             android:icon="@drawable/ic_assignment_add_personal"
             android:title="Personal" />
+        <item
+                  android:id="@+id/nav_caldera"
+                  android:icon="@drawable/ic_add_caldera"
+                  android:title="Caldera" />
+         <item
+                  android:id="@+id/nav_norma"
+                  android:icon="@drawable/ic_add_norma"
+                  android:title="Norma" />
           </menu>
       </item>
 
     <group android:checkableBehavior="single">
     </group>
 
-    <item android:title="Secundario">
+    <item android:title="Agenda">
         <menu>
             <item
-                android:id="@+id/nav_caldera"
-                android:icon="@drawable/ic_add_caldera"
-                android:title="Caldera" />
+                android:id="@+id/nav_agenda"
+                android:icon="@drawable/ic_event_agenda"
+                android:title="Agenda" />
             <item
-                android:id="@+id/nav_norma"
-                android:icon="@drawable/ic_add_norma"
-                android:title="Norma" />
+                android:id="@+id/nav_veragenda"
+                android:icon="@drawable/ic_history_agenda"
+                android:title="Ver Agenda" />
         </menu>
     </item>
 
@@ -56,6 +64,16 @@
             android:title="Switch Panel" />
 
       </menu>
+    </item>
+
+    <item android:title="Configuracion">
+        <menu>
+            <item
+                android:id="@+id/nav_addUser"
+                android:icon="@drawable/ic_person_add_user"
+                android:title="Agregar Usuario" />
+
+        </menu>
     </item>
 
     <item android:title="Logout">

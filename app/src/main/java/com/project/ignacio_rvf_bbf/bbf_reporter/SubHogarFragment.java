@@ -107,6 +107,7 @@ public class SubHogarFragment extends Fragment {
 
                 //GETTING ZONA NAME
                 SubChildInfo info = subdeptlist.get(childPosition);
+
                 SharedPreferences sharedZona = getContext().getSharedPreferences(SHARED_PREF_ZONA,0);
                 SharedPreferences.Editor editor = sharedZona.edit();
                 editor.putString(KEY_TEXT_ZONA, info.getName().toUpperCase());

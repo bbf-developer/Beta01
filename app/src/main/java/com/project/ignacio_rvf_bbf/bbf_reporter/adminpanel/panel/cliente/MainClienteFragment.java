@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,8 @@ import com.project.ignacio_rvf_bbf.bbf_reporter.R;
 import com.project.ignacio_rvf_bbf.bbf_reporter.SubHogarFragment;
 import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.firebaseConnAdmin.ClienteAdapter;
 import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.firebaseConnAdmin.ClienteTest;
+import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.firebaseConnAdmin.ListCliente;
+import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.firebaseConnAdmin.ShowPersonal;
 import com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowClienteFragment;
 
 import java.util.ArrayList;
@@ -35,14 +39,21 @@ import java.util.List;
 
 public class MainClienteFragment extends Fragment {
 
-    private RecyclerView recyclerView;
-    private List<ClienteTest> result;
-    private ClienteAdapter adapter;
+   // private RecyclerView recyclerView;
+   // private List<ClienteTest> result;
+  //  private ClienteAdapter adapter;
 
     private FirebaseDatabase database;
     private DatabaseReference reference;
 
     private Button btn;
+
+    private String checkNull;
+
+    private TextView empty;
+
+    ArrayList<ListCliente> myList3 = new ArrayList<>();
+    private ListView myListView3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,22 +63,28 @@ public class MainClienteFragment extends Fragment {
     database = FirebaseDatabase.getInstance();
     reference = database.getReference("cliente");
 
-    result = new ArrayList<>();
+    //result = new ArrayList<>();
 
-    recyclerView = (RecyclerView) view.findViewById(R.id.rvcliente_list);
-    recyclerView.setHasFixedSize(true);
+    //recyclerView = (RecyclerView) view.findViewById(R.id.rvcliente_list);
+    //recyclerView.setHasFixedSize(true);
+    //LinearLayoutManager linear = new LinearLayoutManager(getActivity());
+    //linear.setOrientation(LinearLayoutManager.VERTICAL);
+    //recyclerView.setLayoutManager(linear);
+    //adapter = new ClienteAdapter(result);
+    //recyclerView.setAdapter(adapter);
+    //createResult();
 
     btn = view.findViewById(R.id.btnAddcliente);
 
-    LinearLayoutManager linear = new LinearLayoutManager(getActivity());
-    linear.setOrientation(LinearLayoutManager.VERTICAL);
-    recyclerView.setLayoutManager(linear);
+    empty = view.findViewById(R.id.vacio);
 
-    //createResult();
+        myListView3 = view.findViewById(R.id.listvCliente);
+        final ArrayAdapter<ListCliente> arrayAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1, myList3);
+        myListView3.setAdapter(arrayAdapter);
+
         updateList();
 
-    adapter = new ClienteAdapter(result);
-    recyclerView.setAdapter(adapter);
+
 
     btn.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -79,58 +96,33 @@ public class MainClienteFragment extends Fragment {
         }
     });
 
-    return view;
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-
-        switch(item.getItemId()){
-            case 0:
-                removeCliente(item.getGroupId());
-                break;
-            case 1:
-        }
-
-        return super.onContextItemSelected(item);
-    }
-
-
-    /**
-     * RECYCLER TESTING
-     * */
-    /* private void createResult(){
-
-        for(int i=0; i<5;i++){
-            result.add(new ClienteTest("rut","razonsoc","giro","codplanta","planta","direccion","contacto","mail","555"));
-        }
-
-    }*/
-
-    private void updateList(){
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                result.add(dataSnapshot.getValue(ClienteTest.class));
-                adapter.notifyDataSetChanged();
+                //result.add(dataSnapshot.getValue(ClienteTest.class));
+                //adapter.notifyDataSetChanged();
+                ListCliente list = dataSnapshot.getValue(ListCliente.class);
+                myList3.add(list);
+                arrayAdapter.notifyDataSetChanged();
+                checkEmpty();
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                ClienteTest cliente = dataSnapshot.getValue(ClienteTest.class);
-                int index = getItemIndex(cliente);
-                result.set(index, cliente);
-                adapter.notifyDataSetChanged();
+                //ClienteTest cliente = dataSnapshot.getValue(ClienteTest.class);
+                //int index = getItemIndex(cliente);
+                //result.set(index, cliente);
+                //adapter.notifyDataSetChanged();
 
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                ClienteTest cliente = dataSnapshot.getValue(ClienteTest.class);
-                int index = getItemIndex(cliente);
-                result.remove(index);
-                adapter.notifyItemRemoved(index);
+                //ClienteTest cliente = dataSnapshot.getValue(ClienteTest.class);
+                //int index = getItemIndex(cliente);
+                //result.remove(index);
+                //adapter.notifyItemRemoved(index);
+                //checkEmpty();
             }
 
             @Override
@@ -143,6 +135,39 @@ public class MainClienteFragment extends Fragment {
 
             }
         });
+
+    return view;
+
+}
+    /*
+       @Override
+       public boolean onContextItemSelected(MenuItem item) {
+
+           switch(item.getItemId()){
+               case 0:
+                   removeCliente(item.getGroupId());
+                   break;
+               case 1:
+           }
+
+           return super.onContextItemSelected(item);
+       }
+   */
+       /**
+        * RECYCLER TESTING
+        * */
+   /*
+   private void createResult(){
+
+        for(int i=0; i<5;i++){
+            result.add(new ClienteTest("rut","razonsoc","giro","codplanta","planta","direccion","contacto","mail","555"));
+        }
+
+    }
+    */
+
+    private void updateList(){
+
     }
 
     /**
@@ -151,10 +176,13 @@ public class MainClienteFragment extends Fragment {
      * https://www.youtube.com/watch?v=PJTs8vZKlWw
      * 19:56
      * */
+    //TODO: FALTA AGREGAR A LOS ADAPTADORES EL ID PARA REFERENCIAR LA KEY Y MODIFICAR
+    //TODO: LA BASE DE DATOS
+    /*
      private int getItemIndex(ClienteTest cliente){
         int index = -1;
-        for(int i=0; i < result.size(); i++){
-            if(result.get(i).id.equals(cliente.id)){
+        for(int i=0; i < myList3.size(); i++){
+            if(myList3.get(i).id.equals(cliente.id)){
                 index = i;
                 break;
               }
@@ -163,11 +191,22 @@ public class MainClienteFragment extends Fragment {
         }
 
      private void removeCliente(int position){
-         reference.child(result.get(position).id).removeValue();
+         reference.child(myList3.get(position).id).removeValue();
      }
-
+    /*
      private void changeCliente(int position){
-         ClienteTest cliente = result.get(position);
+         ClienteTest cliente = myList3.get(position);
 
+     }
+     */
+
+     private void checkEmpty(){
+         if(myList3.size() == 0){
+             myListView3.setVisibility(View.INVISIBLE);
+             empty.setVisibility(View.VISIBLE);
+         }else{
+             myListView3.setVisibility(View.VISIBLE);
+             empty.setVisibility(View.INVISIBLE);
+         }
      }
 }
