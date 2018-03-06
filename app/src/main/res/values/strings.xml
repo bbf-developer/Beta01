@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">BBF_Reporter</string>
-    <string name="title_activity_menu">MenuActivity</string>
+    <string name="app_name">BBF App</string>
+    <string name="title_activity_menu">Menu</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -17,5 +17,5 @@
     <string name="row_hide">Hide 5. Row</string>
     <string name="guardar">Guardar</string>
     <string name="cierra">Cerrar</string>
-    <string name="title_activity_main_admin">MainAdminActivity</string>
+    <string name="title_activity_main_admin">Administrador</string>
 </resources>

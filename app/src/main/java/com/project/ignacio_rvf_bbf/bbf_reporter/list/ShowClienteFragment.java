@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -48,7 +49,7 @@ public class ShowClienteFragment extends Fragment {
 
     private Context mContext;
     private ListView newListView;
-
+    private TextView empty;
     private DatabaseReference gDatabase;
 
     //Shared Preferences
@@ -72,6 +73,8 @@ public class ShowClienteFragment extends Fragment {
         // Inflate the layout for this fragment
        View view = inflater.inflate(R.layout.fragment_show_cliente, container, false);
        newListView = view.findViewById(R.id.lvCliente);
+       empty = view.findViewById(R.id.checkEmpty);
+
        final ArrayAdapter<ShowCliente> arrayAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1, myList);
        newListView.setAdapter(arrayAdapter);
 
@@ -83,6 +86,7 @@ public class ShowClienteFragment extends Fragment {
               //ShowCliente key = dataSnapshot.getKey();
               //mKeys.add(key);
               arrayAdapter.notifyDataSetChanged();
+              checkEmpty();
             }
 
             @Override
@@ -127,8 +131,19 @@ public class ShowClienteFragment extends Fragment {
                     .commit();
         }
     });
+
       return view;
     }
 
+    private void checkEmpty(){
+        if(myList.size() == 0){
+            newListView.setVisibility(View.INVISIBLE);
+            empty.setVisibility(View.VISIBLE);
+        }else{
+            newListView.setVisibility(View.VISIBLE);
+            empty.setVisibility(View.INVISIBLE);
+
+        }
+    }
 
 }

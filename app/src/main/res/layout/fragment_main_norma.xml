@@ -3,11 +3,67 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.panel.cliente.norma.MainNormaFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/contenedor"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context="com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.panel.cliente.MainClienteFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/principal"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/btnAddNorma"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="agregar norma"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/row_header_width"
+            android:text="Normas Registradas"
+            android:gravity="center"
+            android:textSize="35dp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#000"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+
+        <ListView
+            android:layout_marginTop="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listvNorma"
+            />
+
+        <TextView
+            android:id="@+id/vacio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="300dp"
+            android:textColor="#000000"
+            android:layout_gravity="center"
+            android:textSize="25dp"
+            android:text="SIN DATOS"
+            />
+
+
+    </FrameLayout>
 
 </FrameLayout>

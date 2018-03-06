@@ -1,0 +1,87 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.panel.cliente.usuario.MainUserFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout2">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:text="Registro Usuario"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        android:ems="20"
+        android:hint="e-mail"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/editUser"
+        android:layout_below="@+id/editUser"
+        android:layout_marginTop="16dp"
+        android:ems="20"
+        android:inputType="textPersonName"
+        android:hint="Defina clave" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_marginStart="170dp"
+        android:textColor="#000000"
+        android:text="Atribución"
+        android:id="@+id/textView31" />
+
+    <LinearLayout
+        android:layout_marginTop="300dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnAdduser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="160dp"
+            android:ems="30"
+            android:text="AGREGAR USUARIO" />
+
+    </LinearLayout>
+
+    <Switch
+        android:id="@+id/switchAtributo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView31"
+        android:layout_below="@+id/textView31"
+        android:layout_marginTop="26dp"
+        android:text="Usuario" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/switchAtributo"
+        android:layout_alignBottom="@+id/switchAtributo"
+        android:layout_toEndOf="@+id/switchAtributo"
+        android:textColor="#000000"
+        android:text="Administrador" />
+</RelativeLayout>

@@ -21,7 +21,7 @@
             android:textColor="#000000" />
 
         <EditText
-            android:id="@+id/etextRut"
+            android:id="@+id/etextNorma"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/textView2"
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/textView2"
-            android:layout_below="@+id/etextRut"
+            android:layout_below="@+id/etextNorma"
             android:layout_marginTop="33dp"
             android:text="Nombre"
             android:textColor="#000000" />
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textView8"
-            android:layout_alignStart="@+id/etextRut"
+            android:layout_alignStart="@+id/etextNorma"
             android:ems="10"
             android:inputType="textPersonName" />
 

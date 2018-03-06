@@ -1,7 +1,5 @@
 package com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.panel.cliente.personal;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -76,7 +74,7 @@ public class AddPersonalFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_personal, container, false);
 
-        Rut = view.findViewById(R.id.etextRut);
+        Rut = view.findViewById(R.id.etextNorma);
         Nombre = view.findViewById(R.id.etextNombre);
         Apellidos = view.findViewById(R.id.etextApellido);
         Categoria = view.findViewById(R.id.etextCategoria);

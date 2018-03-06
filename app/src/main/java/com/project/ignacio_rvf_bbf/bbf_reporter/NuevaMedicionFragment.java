@@ -42,15 +42,14 @@ import static com.project.ignacio_rvf_bbf.bbf_reporter.SubHogarFragment.SHARED_P
 import static com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowClienteFragment.KEY_TEXT;
 import static com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowClienteFragment.SHARED_PREFS_FILE;
 import static com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowPlantaFragment.KEY_LINEA;
+import static com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowPlantaFragment.KEY_PLANTA;
 import static com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowPlantaFragment.SHARED_PREFS_LINEA;
-import static com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.SubShowClienteFragment.KEY_TEXT1;
-import static com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.SubShowClienteFragment.SHARED_PREF_TEXT;
-
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link NuevaMedicionFragment#newInstance} factory method to
  * create an instance of this fragment.
+ * TABLA DE CONFIGURACION PARA MENÚ CALDERA
  */
 public class NuevaMedicionFragment extends Fragment {
 
@@ -86,7 +85,7 @@ public class NuevaMedicionFragment extends Fragment {
     //TODO: VARIABLES DE LA RECEPCIÓN
     private String cliente;
     private String planta;
-    private String caldera;
+    private String caldera = "CALDERA";
     private String zona;
     private String tipo;
     private String linea;
@@ -119,6 +118,13 @@ public class NuevaMedicionFragment extends Fragment {
     //checker en base de datos
     private String paramCheck;
 
+    //calendar parameters
+
+    private String day1;
+    private String month1;
+    private String year1;
+    private String linea1;
+
     public NuevaMedicionFragment() {
         // Required empty public constructor
     }
@@ -143,14 +149,18 @@ public class NuevaMedicionFragment extends Fragment {
         super.onCreate(savedInstanceState);
         //GUARDAR PARAMETROS PARA SALVAR LA TABLA QUE SE CREO
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("config");
+        databaseReference = FirebaseDatabase.getInstance().getReference("save");
 
         //Asignacion de escritura en BBDD de fecha a la tabla.
         Calendar cal = Calendar.getInstance();
+        int day = cal.get(Calendar.DAY_OF_MONTH);
         int monthofYear = cal.get(Calendar.MONTH);
         int year = cal.get(Calendar.YEAR);
         fecha = String.valueOf(year + "-" + monthofYear);
 
+        day1= String.valueOf(day);
+        month1= String.valueOf(monthofYear);
+        year1= String.valueOf(year);
     }
 
     @Override
@@ -173,8 +183,8 @@ public class NuevaMedicionFragment extends Fragment {
 
         //MUESTRA PLANTA SELECCIONADA
         muestraPlanta = view.findViewById(R.id.txtZona);
-        SharedPreferences sharedPreferences1 = getContext().getSharedPreferences(SHARED_PREF_TEXT, 0);
-        planta = sharedPreferences1.getString(KEY_TEXT1,"");
+        SharedPreferences sharedPreferences1 = getContext().getSharedPreferences(SHARED_PREFS_LINEA, 0);
+        planta = sharedPreferences1.getString(KEY_PLANTA,"");
         muestraPlanta.setText(planta);
 
         //MUESTRA ZONA SELECCIONADA
@@ -261,81 +271,7 @@ public class NuevaMedicionFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                final String verificar = editTubo1.getText().toString();
-                final String checkCol = editCol2.getText().toString();
-
-                //VERIFICA SI HAY CAMPOS VACIOS
-                if (!TextUtils.isEmpty(verificar) && !TextUtils.isEmpty(checkCol)) {
-
-                    if (editTubo1 != null) {
-
-                        checkTubo = Integer.parseInt(editTubo1.getText().toString());
-                    }
-                    //Single Value Listener PARA COMPROBAR CONFIGURACIONES PASADAS O GUIAR A EQUIPO DE TRABAJO.
-                      if (paramCheck != null) {
-                        //SI EL PARAMETRO NO ES NULL DEJA PASAR, SI LO ES PEGA EL ELSE
-
-                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("config")
-                                .child(fecha).child(cliente).child(planta).child(zona);
-                        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                CreaMedicion cm = dataSnapshot.getValue(CreaMedicion.class);
-                                assert cm != null;
-                                final String check1 = cm.getCliente1();
-                                paramCheck = check1;
-                                String check2 = cm.getPlanta1();
-                                String check3 = cm.getZona1();
-                                final int check4 = cm.getLimiteTubo();
-                                final String check5 = cm.getLimiteCol();
-
-                                if (check1.equals(cliente) && check2.equals(planta) && check3.equals(zona) && check4 == (checkTubo) && check5.equals(checkCol)) {
-
-                                    final AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-                                    alertDialog.setTitle("!Matriz Registrada¡");
-                                    alertDialog.setMessage("Esta configuración de matriz ya existe. ¿Desea continuar la actividad?");
-                                    alertDialog.setIcon(R.drawable.ic_report_alert);
-                                    alertDialog.setButton("Aceptar", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            Toast.makeText(getContext(), "SE TRASPASAN PARAMETROS CONFIGURADOS", Toast.LENGTH_LONG).show();
-                                            Bundle bundle = new Bundle();
-                                            bundle.putInt("nTUBO", check4);
-                                            bundle.putString("LETRA", check5);
-                                            MainFragment nmf = new MainFragment();
-                                            nmf.setArguments(bundle);
-                                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                            fragmentManager.beginTransaction().replace(R.id.main_content, nmf)
-                                                    .commit();
-                                        }
-                                    });
-                                    alertDialog.show();
-
-                                } else {
-                                    Toast.makeText(getContext(), "MEDICION CREADA", Toast.LENGTH_SHORT).show();
-                                    addTabla();
-                                }
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                //ONCLICK BUTTON ALERT DIALOG CANCEL
-                            }
-                        });
-
-                    }else{
-                        //paramCheck si es null crea tabla
-                          addTabla();
-                          Toast.makeText(getContext(), "MEDICION AÑADIDA", Toast.LENGTH_SHORT).show();
-
-                      }
-
-                } else {
-
-                    Toast.makeText(getContext(), "Faltan Parametros", Toast.LENGTH_SHORT).show();
-                }
-
+               addTabla();
 
             }
 
@@ -348,18 +284,25 @@ public class NuevaMedicionFragment extends Fragment {
 
         String verificar = editTubo1.getText().toString();
         //PARAMETROS DE CONFIG
+        String menu1 = caldera;
         String cliente1= cliente;
         String planta1 = planta;
         String zona1 = zona;
+        String linea1 = linea;
+
         String limiteCol = String.valueOf(editCol2.getText().toString());
 
         int limiteTubo = Integer.parseInt(verificar);
 
+        String getYear = year1;
+        String getMonth = month1;
+        String getDay = day1;
+
         String id = databaseReference.push().getKey();
 
-        //FALTA CONFIGURACION DE LA LETRA.
-        CreaMedicion cm = new CreaMedicion(id,cliente1,planta1,zona1,limiteTubo, limiteCol);
-        databaseReference.child(fecha).child(cliente).child(planta).child(zona + linea).setValue(cm);
+        //SAVING CONFIGURATION PARAMETERS OF TABLE
+        CreaMedicion cm = new CreaMedicion(id,cliente1,planta1,zona1,limiteTubo, limiteCol, getYear, getMonth, getDay, linea1, menu1);
+        databaseReference.child(id).setValue(cm);
 
         if(!TextUtils.isEmpty(verificar) && !TextUtils.isEmpty(limiteCol)) {
             Bundle bundle = new Bundle();
@@ -378,7 +321,6 @@ public class NuevaMedicionFragment extends Fragment {
         }else{
             Toast.makeText(getContext(), "Faltan Parametros", Toast.LENGTH_SHORT).show();
         }
-
 
     }
 

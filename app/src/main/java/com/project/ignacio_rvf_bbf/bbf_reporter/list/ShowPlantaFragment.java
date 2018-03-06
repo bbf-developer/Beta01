@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -21,6 +22,7 @@ import com.project.ignacio_rvf_bbf.bbf_reporter.R;
 import com.project.ignacio_rvf_bbf.bbf_reporter.RepcalderaFrag;
 import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.firebaseConnAdmin.ClienteUp;
 import com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.ShowCliente;
+import com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.ShowPlanta;
 import com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.SubShowClienteFragment;
 import com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.expandable.ChildInf;
 import com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.expandable.DataAdapterFire;
@@ -40,6 +42,7 @@ public class ShowPlantaFragment extends Fragment {
 
     public static final String SHARED_PREFS_LINEA="sharedLinea";
     public static final String KEY_LINEA="text";
+    public static final String KEY_PLANTA="text2";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,6 +55,8 @@ public class ShowPlantaFragment extends Fragment {
 
     String checkNull;
 
+    public int setGroup;
+
     //TODO: VARIABLES DEL LAYER.
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
@@ -62,10 +67,12 @@ public class ShowPlantaFragment extends Fragment {
     private ArrayList<ChildInf> arrayChild = new ArrayList<>();
     private ExpandableListView expandableList;
 
-    private ArrayList<ShowCliente> arrayCliente = new ArrayList<>();
+    private ArrayList<ClienteUp> arrayCliente = new ArrayList<>();
 
     private FirebaseDatabase firebase;
     private DatabaseReference dataRef;
+
+    private TextView empty;
 
     public ShowPlantaFragment() {
         // Required empty public constructor
@@ -103,32 +110,59 @@ public class ShowPlantaFragment extends Fragment {
         load();
         //testLoad();
         expandableList = view.findViewById(R.id.expandPlanta);
+        empty = view.findViewById(R.id.checkEmpty);
+
         //Obtener el adapter del expandable
         myAdapter = new DataAdapterFire(ShowPlantaFragment.this.getActivity(), arrayChild);
         expandableList.setAdapter(myAdapter);
 
+       expandableList.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+           int previous = -1;
+           @Override
+           public void onGroupExpand(int groupPosition) {
+               if(groupPosition != previous){
+                   expandableList.collapseGroup(previous);
+                   previous = groupPosition;
+               }
 
-        expandableList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
-                //ChildInf select = arrayChild.get(childPosition);
-                String position = String.valueOf(childPosition + 1);
-                SharedPreferences sharedPrefs = getContext().getSharedPreferences(SHARED_PREFS_LINEA, 0);
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString(KEY_LINEA, position);
-                editor.commit();
+           }
+       });
 
-                RepcalderaFrag rpf = new RepcalderaFrag();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.main_content, rpf)
-                        .commit();
+       SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS_LINEA, 0);
+       final SharedPreferences.Editor editor = sharedPreferences.edit();
+       expandableList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+           @Override
+           public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+               final ClienteUp select = arrayCliente.get(i);
+               editor.putString(KEY_PLANTA,select.getNomplanta().toUpperCase());
+               editor.commit();
 
-                return false;
-            }
-        });
+               return false;
+           }
+       });
+
+       expandableList.collapseGroup(setGroup);
+
+       expandableList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+           @Override
+           public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+               String position = String.valueOf(i1 + 1);
+               editor.putString(KEY_LINEA, position);
+               editor.commit();
+
+               RepcalderaFrag rpf = new RepcalderaFrag();
+               FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+               fragmentManager.beginTransaction().replace(R.id.main_content, rpf)
+                       .commit();
+
+               return false;
+           }
+       });
 
         return view;
     }
+
+
 
     private void expand_all(){
         int count = myAdapter.getGroupCount();
@@ -181,8 +215,8 @@ public class ShowPlantaFragment extends Fragment {
         dataRef.child("cliente").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
                   ClienteUp cup = dataSnapshot.getValue(ClienteUp.class);
+                  arrayCliente.add(cup);
                   String planta = cup.getNomplanta().toUpperCase();
                   int linea = cup.getLinea();
                   //checkNull = String.valueOf(linea);

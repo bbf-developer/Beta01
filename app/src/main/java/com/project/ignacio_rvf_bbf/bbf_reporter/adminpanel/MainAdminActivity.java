@@ -16,15 +16,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.project.ignacio_rvf_bbf.bbf_reporter.MenuActivity;
 import com.project.ignacio_rvf_bbf.bbf_reporter.R;
 import com.project.ignacio_rvf_bbf.bbf_reporter.SubHogarFragment;
 import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.panel.cliente.MainClienteFragment;
 import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.panel.cliente.equipo.MainEquipoFragment;
 import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.panel.cliente.personal.MainPersonalFragment;
+import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.panel.cliente.usuario.MainUserFragment;
 
-public class MainAdminActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainAdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,8 @@ public class MainAdminActivity extends AppCompatActivity
         setContentView(R.layout.activity_main_admin);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mAuth = FirebaseAuth.getInstance();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +56,16 @@ public class MainAdminActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public void loadUserInfo(){
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if(user != null){
+            if(user.getDisplayName() != null){
+
+            }
+        }
     }
 
     @Override
@@ -121,6 +137,12 @@ public class MainAdminActivity extends AppCompatActivity
             startActivity(change);
             Toast.makeText(getApplicationContext(),"Switching....",Toast.LENGTH_SHORT).show();
 
+        } else if (id == R.id.nav_addUser) {
+            setTitle("Usuario");
+            MainUserFragment rpf = new MainUserFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main_admin, rpf)
+                    .commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

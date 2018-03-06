@@ -36,7 +36,7 @@ public class AddClienteFragment extends Fragment {
     private EditText txtLinea;
 
     DatabaseReference databaseReference;
-    ProgressBar progressBar;
+    public ProgressDialog progressDialog;
 
     public AddClienteFragment() {
         // Required empty public constructor
@@ -54,13 +54,13 @@ public class AddClienteFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_cliente, container, false);
 
-        txtRut = view.findViewById(R.id.etextRut);
+        txtRut = view.findViewById(R.id.etextNorma);
         txtRazonsocial = view.findViewById(R.id.etextNombre);
         txtGiro = view.findViewById(R.id.etextApellido);
         txtCodplanta = view.findViewById(R.id.etextCategoria);
         txtPlanta = view.findViewById(R.id.etextCelular);
         txtDireccion = view.findViewById(R.id.etextDireccion);
-        txtContacto = view.findViewById(R.id.etextFono);
+        txtContacto = view.findViewById(R.id.etextContacto);
         txtMail = view.findViewById(R.id.etextMail);
         txtFono = view.findViewById(R.id.etextFono);
         txtLinea = view.findViewById(R.id.etLinea);
@@ -71,6 +71,12 @@ public class AddClienteFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 pushAddCliente();
+                MainClienteFragment mcf = new MainClienteFragment();
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_main_admin, mcf)
+                        .commit();
+                dismissDialog();
             }
         });
 
@@ -94,6 +100,7 @@ public class AddClienteFragment extends Fragment {
         if(!TextUtils.isEmpty(rut)&& !TextUtils.isEmpty(razonsoc)&& !TextUtils.isEmpty(giro)&& !TextUtils.isEmpty(codplanta)&&
                 !TextUtils.isEmpty(nomplanta)&&!TextUtils.isEmpty(direccion)&&!TextUtils.isEmpty(contacto)&&!TextUtils.isEmpty(mail)&&
                 !TextUtils.isEmpty(fono)){
+            showDialog();
 
             String id = databaseReference.push().getKey();
 
@@ -102,33 +109,32 @@ public class AddClienteFragment extends Fragment {
 
             databaseReference.child(id).setValue(client);
             //showDialog();
-            Toast.makeText(getContext(), "Cliente Añadido",
-                    Toast.LENGTH_SHORT).show();
 
             MainClienteFragment rpf = new MainClienteFragment();
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main_admin, rpf)
                     .commit();
 
-
+            Toast.makeText(getContext(), "Cliente Añadido",
+                    Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(getContext(), "Falta Completar",
                     Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
     public void showDialog(){
-
-
         //Dialogo de progreso al logear la app
-        ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle("");
         progressDialog.setMessage("Cargando... Espere Porfavor...");
         progressDialog.show();
-        progressDialog.dismiss();
+    }
 
+    public void dismissDialog(){
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
 }

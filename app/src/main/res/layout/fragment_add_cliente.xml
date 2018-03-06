@@ -21,7 +21,7 @@
         android:textColor="#000000" />
 
     <EditText
-        android:id="@+id/etextRut"
+        android:id="@+id/etextNorma"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView2"
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView2"
-        android:layout_below="@+id/etextRut"
+        android:layout_below="@+id/etextNorma"
         android:layout_marginTop="33dp"
         android:textColor="#000000"
         android:text="Razon Social" />
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView8"
-        android:layout_alignStart="@+id/etextRut"
+        android:layout_alignStart="@+id/etextNorma"
         android:ems="10"
         android:hint="Celulosa Arauco"
         android:inputType="textPersonName" />
@@ -147,7 +147,7 @@
         android:text="Contacto" />
 
     <EditText
-        android:id="@+id/etextFono"
+        android:id="@+id/etextContacto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView13"
@@ -161,11 +161,10 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView13"
-        android:layout_below="@+id/etextFono"
-        android:layout_marginTop="40dp"
-        android:textColor="#000000"
-        android:text="Mail" />
+        android:layout_above="@+id/textView9"
+        android:layout_alignEnd="@+id/textView15"
+        android:text="Mail"
+        android:textColor="#000000" />
 
     <EditText
         android:id="@+id/etextMail"
@@ -181,10 +180,10 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/etextRut"
-        android:layout_alignBottom="@+id/etextRut"
+        android:layout_alignBaseline="@+id/etextNorma"
+        android:layout_alignBottom="@+id/etextNorma"
         android:layout_marginStart="139dp"
-        android:layout_toEndOf="@+id/etextRut"
+        android:layout_toEndOf="@+id/etextNorma"
         android:textColor="#000000"
         android:text="Fono" />
 
@@ -192,8 +191,8 @@
         android:id="@+id/etextFono"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/etextRut"
-        android:layout_alignBottom="@+id/etextRut"
+        android:layout_alignBaseline="@+id/etextNorma"
+        android:layout_alignBottom="@+id/etextNorma"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="68dp"
         android:ems="10"
@@ -204,29 +203,29 @@
         android:id="@+id/btnPersonal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/etextFono"
-        android:layout_below="@+id/textView10"
+        android:layout_alignBottom="@+id/etextDireccion"
+        android:layout_alignStart="@+id/etLinea"
         android:text="Guardar" />
 
     <TextView
         android:id="@+id/textView29"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView9"
+        android:layout_above="@+id/etextCategoria"
         android:layout_alignStart="@+id/textView15"
-        android:textColor="#000000"
-        android:text="Cantidad Linea" />
+        android:text="Cantidad Linea(s)"
+        android:textColor="#000000" />
 
     <EditText
         android:id="@+id/etLinea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/etextApellido"
-        android:layout_alignStart="@+id/etextFono"
+        android:layout_alignStart="@+id/etextMail"
+        android:layout_alignTop="@+id/textView9"
         android:ems="10"
-        android:maxLength="1"
         android:hint="1 o 2 o 3"
-        android:inputType="number" />
+        android:inputType="number"
+        android:maxLength="1" />
 
 </RelativeLayout>
 </ScrollView>

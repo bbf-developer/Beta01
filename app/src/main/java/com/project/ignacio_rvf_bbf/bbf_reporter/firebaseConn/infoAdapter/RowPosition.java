@@ -1,12 +1,14 @@
 package com.project.ignacio_rvf_bbf.bbf_reporter.firebaseConn.infoAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Ignacio-RVF-BBF on 21/02/2018.
  */
 
-public class RowPosition extends ArrayList<RowPosition> {
+public class RowPosition {
 
     private int rowposition;
 
@@ -19,7 +21,6 @@ public class RowPosition extends ArrayList<RowPosition> {
     }
 
     public int getRowposition(){return rowposition; }
-
 
 
 }

@@ -16,14 +16,14 @@ public class MedicionTest {
        int proyeccion;
 
        int rowposition;
-
+       int colposition;
 
     public MedicionTest() {
         //VOID CONSTRUCTOR
     }
 
     public MedicionTest(String medicionId, double medicion, double medicionAnt, double valorNom, double espesor, int proyeccion,
-                        int rowposition) {
+                        int rowposition, int colposition) {
         this.medicionId = medicionId;
         this.medicion = medicion;
         this.medicionAnt = medicionAnt;
@@ -31,6 +31,7 @@ public class MedicionTest {
         this.espesor = espesor;
         this.proyeccion = proyeccion;
         this.rowposition = rowposition;
+        this.colposition = colposition;
     }
 
     public String getMedicionId() {
@@ -58,5 +59,7 @@ public class MedicionTest {
     }
 
     public int getRowposition(){return rowposition; }
+
+    public int getColposition(){return colposition;}
 
 }

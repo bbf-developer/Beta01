@@ -1,13 +1,191 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.panel.cliente.norma.AddNormaFragment">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_margin="1dp">
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="57dp"
+                android:layout_marginTop="82dp"
+                android:text="Cod. Norma"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/etextNorma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView2"
+                android:layout_alignBottom="@+id/textView2"
+                android:layout_marginStart="75dp"
+                android:layout_toEndOf="@+id/textView8"
+                android:ems="10"
+                android:hint="11111111111-1"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView2"
+                android:layout_below="@+id/etextNorma"
+                android:layout_marginTop="33dp"
+                android:text="Nombre Norma"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/etextNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView8"
+                android:layout_alignStart="@+id/etextNorma"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView8"
+                android:layout_below="@+id/etextNombre"
+                android:layout_marginTop="27dp"
+                android:text="Año"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/etextApellido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView9"
+                android:layout_alignBottom="@+id/textView9"
+                android:layout_alignStart="@+id/etextNombre"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView9"
+                android:layout_below="@+id/etextApellido"
+                android:layout_marginTop="25dp"
+                android:text="Categoria"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/etextCategoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/etextApellido"
+                android:layout_below="@+id/etextApellido"
+                android:layout_marginTop="13dp"
+                android:ems="10"
+                android:hint="Ej: Inspector..."
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView10"
+                android:layout_below="@+id/etextCategoria"
+                android:layout_marginTop="27dp"
+                android:text="Celular"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/etextCelular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView11"
+                android:layout_alignBottom="@+id/textView11"
+                android:layout_alignStart="@+id/etextCategoria"
+                android:ems="10"
+                android:hint="+56 9 ..."
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView11"
+                android:layout_below="@+id/etextCelular"
+                android:layout_marginTop="32dp"
+                android:textColor="#000000"
+                android:text="Dirección" />
+
+            <EditText
+                android:id="@+id/etextDireccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView12"
+                android:layout_alignBottom="@+id/textView12"
+                android:layout_alignStart="@+id/etextCelular"
+                android:ems="10"
+                android:hint="Actual"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView12"
+                android:layout_below="@+id/etextDireccion"
+                android:layout_marginTop="41dp"
+                android:text="Telefono"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/etextFono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView13"
+                android:layout_alignBottom="@+id/textView13"
+                android:layout_alignStart="@+id/etextDireccion"
+                android:ems="10"
+                android:hint="Cod. Area + ..."
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView13"
+                android:layout_below="@+id/etextFono"
+                android:layout_marginTop="40dp"
+                android:textColor="#000000"
+                android:text="Mail" />
+
+            <EditText
+                android:id="@+id/etextMail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView14"
+                android:layout_alignStart="@+id/etextFono"
+                android:ems="10"
+                android:hint="sucorreo@mail.cl"
+                android:inputType="textEmailAddress" />
+
+            <Button
+                android:id="@+id/btnPersonal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/textView10"
+                android:layout_marginStart="130dp"
+                android:layout_toEndOf="@+id/etextCategoria"
+                android:text="Guardar" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+

@@ -137,8 +137,6 @@ public class MainPersonalFragment extends Fragment {
             }
         });
 
-
-
         return view;
     }
 
