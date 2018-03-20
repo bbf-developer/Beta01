@@ -52,6 +52,7 @@ public class MainAdminActivity extends AppCompatActivity implements NavigationVi
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
+        drawer.openDrawer(GravityCompat.START);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -143,6 +144,9 @@ public class MainAdminActivity extends AppCompatActivity implements NavigationVi
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main_admin, rpf)
                     .commit();
+
+        } else if (id == R.id.nav_logout) {
+            //USER SESION DEAD
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

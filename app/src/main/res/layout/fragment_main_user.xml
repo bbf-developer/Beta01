@@ -54,7 +54,8 @@
         android:layout_marginTop="300dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout3">
 
         <Button
             android:id="@+id/btnAdduser"
@@ -84,4 +85,14 @@
         android:layout_toEndOf="@+id/switchAtributo"
         android:textColor="#000000"
         android:text="Administrador" />
+
+    <ListView
+        android:id="@+id/usersList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+
 </RelativeLayout>

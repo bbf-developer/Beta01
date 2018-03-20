@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,7 +17,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.MainAdminActivity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -35,12 +44,44 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+    DatabaseReference myData;
+
+    ArrayList<String> myList1 = new ArrayList<>();
+    ArrayList<String> myList2 = new ArrayList<>();
+
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //updateUI(currentUser);
+        myData = FirebaseDatabase.getInstance().getReference("user");
+
+        myData.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChildren()) {
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                        HashMap<String, Object> myMap = (HashMap<String, Object>) data.getValue();
+                        Log.e("TAG", String.valueOf(myMap.get("mail")));
+                        Log.e("TAG", String.valueOf(myMap.get("atributo")));
+
+                        myList1.add(String.valueOf(myMap.get("mail")));
+                        myList2.add(String.valueOf(myMap.get("atributo")));
+                    }
+
+                }else{
+                    Toast.makeText(getBaseContext(), "Sin Usuarios Añadidos", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getBaseContext(),"Error en Base de datos", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     @Override
@@ -89,13 +130,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 userLogin();
+
             }
         });
+
+
+
 
     }
 
     private void userLogin(){
-        String email = textEmail.getText().toString();
+        final String email = textEmail.getText().toString();
         String password = textPassword.getText().toString();
 
         if(TextUtils.isEmpty(email)){
@@ -115,20 +160,39 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            //Log.d(TAG, "singInWithEmail:success");
-                            //FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(LoginActivity.this, MainAdminActivity.class);
-                            startActivity(intent);
-                            finish();
+                        for(int i=0; i < myList1.size(); i++){
+                            if(myList1.get(i).contains(email)){
+                                 if(myList2.get(i).contains("admin")){
+                                        Intent intent = new Intent(LoginActivity.this, MainAdminActivity.class);
+                                        startActivity(intent);
+                                        finish();
+
+                                  }else{
+
+                                        Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                     }
+
+                            }
+
+                         }
+
                         }else{
                             //Log.w(TAG, "singInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Sesion Fallida",
+                            Toast.makeText(LoginActivity.this, "Clave o Email Erroneo",
                                     Toast.LENGTH_LONG).show();
 
                         }
                         hideDialog();
                     }
                 });
+    }
+
+    private void userLogOn(){
+
+
+
     }
 
     public void showDialog(){

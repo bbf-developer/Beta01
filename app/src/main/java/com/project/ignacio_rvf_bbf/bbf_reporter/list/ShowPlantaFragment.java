@@ -21,9 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.project.ignacio_rvf_bbf.bbf_reporter.R;
 import com.project.ignacio_rvf_bbf.bbf_reporter.RepcalderaFrag;
 import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.firebaseConnAdmin.ClienteUp;
-import com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.ShowCliente;
-import com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.ShowPlanta;
-import com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.SubShowClienteFragment;
 import com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.expandable.ChildInf;
 import com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.expandable.DataAdapterFire;
 import com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.expandable.GroupInf;
@@ -74,6 +71,9 @@ public class ShowPlantaFragment extends Fragment {
 
     private TextView empty;
 
+    //ALMACENAMIENTO DE PARAMETROS PARA BUNDLE.
+    private String cliente1;
+
     public ShowPlantaFragment() {
         // Required empty public constructor
     }
@@ -90,9 +90,7 @@ public class ShowPlantaFragment extends Fragment {
     public static ShowPlantaFragment newInstance(String param1, String param2) {
         ShowPlantaFragment fragment = new ShowPlantaFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -100,6 +98,9 @@ public class ShowPlantaFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dataRef = FirebaseDatabase.getInstance().getReference();
+
+        cliente1 = this.getArguments().getString("KEY_CLIENTE");
+
     }
 
     @Override
@@ -128,15 +129,13 @@ public class ShowPlantaFragment extends Fragment {
            }
        });
 
-       SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS_LINEA, 0);
-       final SharedPreferences.Editor editor = sharedPreferences.edit();
+      final Bundle bundle = new Bundle();
+      bundle.putString("KEY_CLIENTE", cliente1);
        expandableList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
            @Override
            public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
                final ClienteUp select = arrayCliente.get(i);
-               editor.putString(KEY_PLANTA,select.getNomplanta().toUpperCase());
-               editor.commit();
-
+               bundle.putString("KEY_PLANTA", select.getNomplanta().toUpperCase());
                return false;
            }
        });
@@ -147,11 +146,12 @@ public class ShowPlantaFragment extends Fragment {
            @Override
            public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
                String position = String.valueOf(i1 + 1);
-               editor.putString(KEY_LINEA, position);
-               editor.commit();
+               //editor.putString(KEY_LINEA, position);
+                bundle.putString("KEY_LINEA", position);
 
                RepcalderaFrag rpf = new RepcalderaFrag();
                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+               rpf.setArguments(bundle);
                fragmentManager.beginTransaction().replace(R.id.main_content, rpf)
                        .commit();
 

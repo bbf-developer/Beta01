@@ -38,9 +38,11 @@ public class MyTableViewAdapter extends AbstractTableAdapter<ColumnHeaderModel,R
 
     @Override
     public void onBindCellViewHolder(AbstractViewHolder holder, Object p_jValue, int p_nXPosition, int p_nYPosition) {
+        //CREAR CLASE DE PRUEBA PARA SETEAR LOS DATOS EN EL BINDHOLDER DE LA CELDA
+
         CellModel cell = (CellModel) p_jValue;
 
-        //Actualiza el elemento que contiene la celda.
+        //Actualiza el elemento que contiene la celda (SIN CONFIRMAR).
         // Get the holder to update cell item text.
         //INSTANCIA PARA DIBUJAR LAS CELDAS CORRESPONDIENTES
         CellViewHolder viewHolder = (CellViewHolder) holder;
@@ -48,11 +50,9 @@ public class MyTableViewAdapter extends AbstractTableAdapter<ColumnHeaderModel,R
         //PONE PARAMETRO POR DEFECTO EN LAS CELDAS
         viewHolder.cell_textview.setText(String.valueOf(cell.getData()));
 
-        /**
+        /**Evrenkoskun:
          TableView debería tener el cambio de tamaño automático para celdas y columnas.
          Entonces deberías considerar las siguientes líneas. De lo contrario, puede ignorarlos.
-
-         Es necesario volver a medir.
          */
         viewHolder.cell_container.getLayoutParams().width = LinearLayout.LayoutParams.WRAP_CONTENT;
         viewHolder.cell_textview.requestLayout();

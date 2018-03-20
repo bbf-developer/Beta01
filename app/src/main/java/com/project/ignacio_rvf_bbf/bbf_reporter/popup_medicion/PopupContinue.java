@@ -38,7 +38,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.project.ignacio_rvf_bbf.bbf_reporter.R;
-import com.project.ignacio_rvf_bbf.bbf_reporter.RepcalderaFrag;
 import com.project.ignacio_rvf_bbf.bbf_reporter.firebaseConn.infoAdapter.MedicionTest;
 import com.project.ignacio_rvf_bbf.bbf_reporter.firebaseConn.infoAdapter.RowPosition;
 import com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.ShowCliente;
@@ -58,13 +57,13 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.prefs.Preferences;
 
-import static com.project.ignacio_rvf_bbf.bbf_reporter.MainFragment.SHARED_PREFS_POPUP_MAIN;
 
-import static com.project.ignacio_rvf_bbf.bbf_reporter.NuevaMedicionFragment.KEY_CALDERA1;
-import static com.project.ignacio_rvf_bbf.bbf_reporter.NuevaMedicionFragment.KEY_CLIENTE1;
-import static com.project.ignacio_rvf_bbf.bbf_reporter.NuevaMedicionFragment.KEY_LINEA1;
-import static com.project.ignacio_rvf_bbf.bbf_reporter.NuevaMedicionFragment.KEY_PLANTA1;
-import static com.project.ignacio_rvf_bbf.bbf_reporter.NuevaMedicionFragment.KEY_ZONA1;
+import static com.project.ignacio_rvf_bbf.bbf_reporter.checkpointer.ContinueFragment.KEY_VAL1;
+import static com.project.ignacio_rvf_bbf.bbf_reporter.checkpointer.ContinueFragment.KEY_VAL2;
+import static com.project.ignacio_rvf_bbf.bbf_reporter.checkpointer.ContinueFragment.KEY_VAL3;
+import static com.project.ignacio_rvf_bbf.bbf_reporter.checkpointer.ContinueFragment.KEY_VAL4;
+import static com.project.ignacio_rvf_bbf.bbf_reporter.checkpointer.ContinueFragment.KEY_VAL5;
+import static com.project.ignacio_rvf_bbf.bbf_reporter.checkpointer.ContinueFragment.SHARED_PREF_CONTINUE;
 import static com.project.ignacio_rvf_bbf.bbf_reporter.tableadapter.listener.MyTableViewListener.KEY_NUM1;
 import static com.project.ignacio_rvf_bbf.bbf_reporter.tableadapter.listener.MyTableViewListener.KEY_NUM2;
 import static com.project.ignacio_rvf_bbf.bbf_reporter.tableadapter.listener.MyTableViewListener.SHARED_PREF_NUM1;
@@ -74,7 +73,7 @@ import static com.project.ignacio_rvf_bbf.bbf_reporter.tableadapter.listener.MyT
  * @param
  */
 
-public class PopupClickFragment extends DialogFragment {
+public class PopupContinue extends DialogFragment {
 
     private static final String TAG = "MyActivity";
 
@@ -137,11 +136,9 @@ public class PopupClickFragment extends DialogFragment {
 
     int position = -1;
 
-    private Boolean bool;
-
     DatabaseReference databaseReference;
 
-    public PopupClickFragment() {
+    public PopupContinue() {
         // Required empty public constructor
     }
 
@@ -149,15 +146,19 @@ public class PopupClickFragment extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //********************
-        SharedPreferences sharedPrefs = getContext().getSharedPreferences(SHARED_PREFS_POPUP_MAIN, 0);
-        nomCliente = sharedPrefs.getString(KEY_CLIENTE1, "").toLowerCase();
-        nomPlanta = sharedPrefs.getString(KEY_PLANTA1, "").toLowerCase();
-        nomZona = sharedPrefs.getString(KEY_ZONA1,"").toLowerCase();
-        nomTipo = sharedPrefs.getString(KEY_CALDERA1,"").toLowerCase();
-        nomLinea = sharedPrefs.getString(KEY_LINEA1,"").toLowerCase();
+        //GETTING STRING TO SHOW CLIENTE.
+        SharedPreferences sharedCont = getContext().getSharedPreferences(SHARED_PREF_CONTINUE,0);
+        nomCliente = sharedCont.getString(KEY_VAL1,"").toLowerCase();
 
-        //********************
+        nomPlanta = sharedCont.getString(KEY_VAL2,"").toLowerCase();
+
+        nomZona = sharedCont.getString(KEY_VAL3,"").toLowerCase();
+
+        nomTipo = sharedCont.getString(KEY_VAL4, "").toLowerCase();
+
+        nomLinea = sharedCont.getString(KEY_VAL5,"");
+
+
         databaseReference = FirebaseDatabase.getInstance().getReference("medicion").child(nomCliente)
                 .child(nomPlanta).child(nomZona).child(nomTipo + nomLinea);
 
@@ -187,9 +188,11 @@ public class PopupClickFragment extends DialogFragment {
         c = abc[COL_SIZE];
 
         tvPutCellName1.setText(String.valueOf(c));
+
         tvPutNumCell = dialogview.findViewById(R.id.putCellNumber);
         //RECEPCION DE NUMERO EN STRING
         tvPutNumCell.setText(filaPos);
+
         etMedicion1 = dialogview.findViewById(R.id.etMedicion);
         etMedicionAnt1 = dialogview.findViewById(R.id.etMedicionAnt);
         etValorNom1 = dialogview.findViewById(R.id.etValorNom);
@@ -197,51 +200,112 @@ public class PopupClickFragment extends DialogFragment {
         etProyeccion1 = dialogview.findViewById(R.id.etProyeccion);
         etPrecaucion = dialogview.findViewById(R.id.etPrecaucion);
 
-        databaseReference.child(fecha).child(String.valueOf(c)).addValueEventListener(new ValueEventListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setView(dialogview)
+                .setPositiveButton(R.string.guardar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        databaseReference.child(fecha).child(String.valueOf(c)).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if(dataSnapshot.hasChildren()) {
+
+                                    //NO ES NULL, PROCEDE A LEER TODOS LOS CHILD DEL NODO.
+                                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                                        HashMap<Integer, Object> myHash = (HashMap<Integer, Object>) snap.getValue();
+                                        String check = String.valueOf(myHash.get("rowposition"));
+                                        Log.e("TAG", check);
+                                        myList.add(Integer.parseInt(String.valueOf(myHash.get("rowposition"))));
+                                    }
+
+                                    int rowpos = Integer.parseInt(filaPos);
+                                    position = myList.indexOf(rowpos);
+
+                                }else{
+                                    //IGUAL A NULL, AGREGA EL PRIMER PARAMETRO
+
+                                    String medicion = etMedicion1.getText().toString().trim();
+                                    String medicionAnt = etMedicionAnt1.getText().toString().trim();
+                                    String valorNom = etValorNom1.getText().toString().trim();
+                                    String espesor = etEspesor1.getText().toString().trim();
+                                    String proyeccion = etProyeccion1.getText().toString().trim();
+                                    String precaucion = etPrecaucion.getText().toString().trim();
+
+
+                                    //UPLOAD DATA TO FIREBASE
+                                    if(!TextUtils.isEmpty(medicion)&&!TextUtils.isEmpty(medicionAnt)&&!TextUtils.isEmpty(valorNom)&&!TextUtils.isEmpty(espesor)
+                                            &&!TextUtils.isEmpty(proyeccion)){
+
+                                        double medicionDouble =Double.parseDouble(medicionAnt);
+                                        double medicionantDouble =Double.parseDouble(medicion);
+                                        double valorNomDouble =Double.parseDouble(valorNom);
+                                        double espesorDouble =Double.parseDouble(espesor);
+                                        double precaucionDouble = Double.parseDouble(precaucion);
+
+                                        int proyeccionInt =Integer.parseInt(proyeccion);
+
+                                        int rowposition = Integer.parseInt(filaPos);
+                                        int colposition = Integer.parseInt(colPos);
+
+                                        String id = databaseReference.push().getKey();
+                                        MedicionTest med = new MedicionTest(id,  medicionDouble, medicionantDouble,valorNomDouble
+                                                ,espesorDouble,precaucionDouble,proyeccionInt, rowposition, colposition);
+
+                                        databaseReference.child(fecha).child(String.valueOf(c)).child(id).setValue(med);
+
+                                            /* Toast.makeText(getContext(), "Parametro Ingresado",
+                                           Toast.LENGTH_SHORT).show();*/
+                                    } else{
+                                          /* Toast.makeText(getContext(), "Faltan Parametros",
+                                            Toast.LENGTH_SHORT).show();
+                                                    */
+                                    }
+
+                                }
+
+                                //myList.indexOf(rowpos)
+                                if (position == -1) {
+                                    Log.e("TAG", "NO EXISTE");
+                                    //PROBLEMA: AL RECORRER MUESTRA EL ALERT DIALOG
+                                    addMedicion();
+
+                                } else {
+                                    //LANZA ALERT DIALOG
+                                    Log.e("TAG", "ALERTA");
+                                    new AlertDialog.Builder(dialogview.getContext())
+                                            .setTitle("Registro existente en " + " " + String.valueOf(c) + "-" + filaPos )
+                                            .setMessage("Mantenga pulsada la celda para modificar.")
+                                            .setIcon(R.drawable.ic_error_alert)
+                                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    dismiss();
+
+                                                }
+
+                                            }).show();
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+                    }
+                }).setNegativeButton(R.string.cierra, new DialogInterface.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //IDEA: COMPARAR VALOR DE FILA CON VALOR DEL CHILD EN DONDE SE EMPAQUETAN LOS DEMÁS VALORES
-                if(dataSnapshot.child(filaPos).getValue() != null){
-                    //Log.e(TAG, "TIENE DATOS");
-                    bool = true;
-
-                } else {
-                    //Log.e(TAG, "NO TIENE DATOS");
-                    //addMedicion();
-                    bool = false;
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dismiss();
             }
         });
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setView(dialogview);
-        builder.setCancelable(false);
-
-                builder.setPositiveButton(R.string.guardar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //Adding positive button.
-                    }
-                });
-
-                builder.setNegativeButton(R.string.cierra, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                       //Adding negative button.
-                        dismiss();
-                    }
-                });
-
         final AlertDialog dialog = builder.create();
-
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.show();
 
         dialogview.setOnTouchListener(new View.OnTouchListener() {
 
@@ -261,54 +325,6 @@ public class PopupClickFragment extends DialogFragment {
                 dialog.getWindow().setAttributes(wmlp);
 
                 return true;
-            }
-        });
-
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-            //Evita que alert dialog se cierre vacio...
-            @Override
-            public void onClick(View view) {
-                String medicion = etMedicion1.getText().toString().trim();
-                String medicionAnt = etMedicionAnt1.getText().toString().trim();
-                String valorNom = etValorNom1.getText().toString().trim();
-                String espesor = etEspesor1.getText().toString().trim();
-                String proyeccion = etProyeccion1.getText().toString().trim();
-                String precaucion = etPrecaucion.getText().toString().trim();
-
-                if (medicion.equals("") && medicionAnt.equals("") && valorNom.equals("") && espesor.equals("")
-                        && proyeccion.equals("") && precaucion.equals("")) {
-                    Toast.makeText(getContext(), "Faltan Parametros", Toast.LENGTH_SHORT).show();
-
-                } else {
-
-                    if(bool == true){
-                        //Log.e(TAG, "exists");
-                        //Log.e("TAG", "ALERTA");
-                        new AlertDialog.Builder(dialogview.getContext())
-                                .setTitle("Registro existente en " + " " + String.valueOf(c) + "-" + filaPos )
-                                .setMessage("Mantenga pulsada la celda para modificar.")
-                                .setIcon(R.drawable.ic_error_alert)
-                                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        dismiss();
-
-                                    }
-
-                                }).show();
-
-                    }
-                    //******
-
-                    if (bool == false){
-                        //Log.e(TAG, "no exists");
-                        //Toast.makeText(getContext(), "Parametro Ingresado", Toast.LENGTH_SHORT).show();
-                        addMedicion();
-                        dismiss();
-
-                    }
-
-                }
             }
         });
 
@@ -337,6 +353,10 @@ public class PopupClickFragment extends DialogFragment {
         String proyeccion = etProyeccion1.getText().toString().trim();
         String precaucion = etPrecaucion.getText().toString().trim();
 
+        //UPLOAD DATA TO FIREBASE
+        if(!TextUtils.isEmpty(medicion)&&!TextUtils.isEmpty(medicionAnt)&&!TextUtils.isEmpty(valorNom)&&!TextUtils.isEmpty(espesor)
+                &&!TextUtils.isEmpty(proyeccion)){
+
             double medicionDouble =Double.parseDouble(medicionAnt);
             double medicionantDouble =Double.parseDouble(medicion);
             double valorNomDouble =Double.parseDouble(valorNom);
@@ -349,16 +369,18 @@ public class PopupClickFragment extends DialogFragment {
             int colposition = Integer.parseInt(colPos);
 
             String id = databaseReference.push().getKey();
-
             MedicionTest med = new MedicionTest(id,  medicionDouble, medicionantDouble,valorNomDouble
                     ,espesorDouble, precaucionDouble, proyeccionInt, rowposition, colposition);
 
-            databaseReference.child(fecha).child(String.valueOf(c)).child(String.valueOf(rowposition)).setValue(med);
+            databaseReference.child(fecha).child(String.valueOf(c)).child(id).setValue(med);
 
-            Toast.makeText(getContext(), "Parametros Ingresados", Toast.LENGTH_SHORT).show();
+           /* Toast.makeText(getContext(), "Parametro Ingresado",
+                    Toast.LENGTH_SHORT).show();*/
+        } else{
+           /* Toast.makeText(getContext(), "Faltan Parametros",
+                    Toast.LENGTH_SHORT).show();
+                                                    */
+        }
     }
 
 }
-
-
-

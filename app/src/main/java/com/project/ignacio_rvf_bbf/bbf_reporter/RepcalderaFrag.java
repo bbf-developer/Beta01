@@ -20,58 +20,54 @@ import java.util.List;
 
 
 /**
+ *
  * A simple {@link Fragment} subclass.
  *
  */
+
 public class RepcalderaFrag extends Fragment {
     private LinkedHashMap<String, ChildInfo> childlist = new LinkedHashMap<>();
     private DataAdapter listaadapter;
     private ArrayList<ChildInfo> deptlist = new ArrayList<>();
     private ExpandableListView explistview;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
     //TODO:SHARED PREFS DATA
     public static final String SHARED_PREFS_CALDERA = "tipoCald";
     public static final String KEY_CALDERA = "KEY_CALDERA";
+    public static final String KEY_CLIENTE = "KEY_CLIENTE";
+    public static final String KEY_PLANTA = "KEY_PLANTA";
+    public static final String KEY_LINEA = "KEY_LINEA";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    // TODO: Recepcion de parametros
+    private String rCliente;
+    private String rPlanta;
+    private String rLinea;
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ExpandLVFragment.
+     *
      */
     // TODO: Rename and change types and number of parameters
     public static RepcalderaFrag newInstance(String param1, String param2) {
         RepcalderaFrag fragment = new RepcalderaFrag();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        rCliente = this.getArguments().getString("KEY_CLIENTE");
+        rPlanta = this.getArguments().getString("KEY_PLANTA");
+        rLinea = this.getArguments().getString("KEY_LINEA");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
      View view = inflater.inflate(R.layout.fragment_repcaldera, container, false);
+     getActivity().setTitle("Menú Configuración");
 
         LoadData();
 
@@ -125,13 +121,17 @@ public class RepcalderaFrag extends Fragment {
                             .commit();
                 }
 
-                //SETTING INTO SHARED GROUP NAME
+                //RECEPCIONAR 3 ULTIMOS VALORES + 1 DE MENUCALDERA
                 ChildInfo info = deptlist.get(groupPosition);
 
                 SharedPreferences sharedPref3 = getContext().getSharedPreferences(SHARED_PREFS_CALDERA, 0);
                 SharedPreferences.Editor editor = sharedPref3.edit();
                 editor.putString(KEY_CALDERA, info.getName().toUpperCase());
+                editor.putString(KEY_CLIENTE, rCliente);
+                editor.putString(KEY_PLANTA, rPlanta );
+                editor.putString(KEY_LINEA, rLinea);
                 editor.commit();
+
 
                 return false;
             }

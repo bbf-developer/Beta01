@@ -118,11 +118,11 @@ public class MainClienteFragment extends Fragment {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                //ClienteTest cliente = dataSnapshot.getValue(ClienteTest.class);
-                //int index = getItemIndex(cliente);
-                //result.remove(index);
-                //adapter.notifyItemRemoved(index);
-                //checkEmpty();
+               //ClienteTest cliente = dataSnapshot.getValue(ClienteTest.class);
+               //int index = getItemIndex(cliente);
+               //result.remove(index);
+               //adapter.notifyItemRemoved(index);
+               //checkEmpty();
             }
 
             @Override
@@ -139,7 +139,7 @@ public class MainClienteFragment extends Fragment {
     return view;
 
 }
-    /*
+ /*
        @Override
        public boolean onContextItemSelected(MenuItem item) {
 

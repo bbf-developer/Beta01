@@ -2,6 +2,7 @@ package com.project.ignacio_rvf_bbf.bbf_reporter.checkpointer;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -43,6 +44,14 @@ import java.util.List;
  */
 public class ContinueFragment extends Fragment {
 
+    public final static String SHARED_PREF_CONTINUE="continueData";
+    public final static String KEY_VAL1= "KEY_VAL1";
+    public final static String KEY_VAL2= "KEY_VAL2";
+    public final static String KEY_VAL3= "KEY_VAL3";
+    public final static String KEY_VAL4= "KEY_VAL4";
+    public final static String KEY_VAL5= "KEY_VAL5";
+
+
 
     private Context xContext;
 
@@ -52,6 +61,11 @@ public class ContinueFragment extends Fragment {
 
     ArrayList<String> List1 = new ArrayList<>();
     ArrayList<Integer> List2 = new ArrayList<>();
+    ArrayList<String> List3 = new ArrayList<>();
+    ArrayList<String> List4 = new ArrayList<>();
+    ArrayList<String> List5 = new ArrayList<>();
+    ArrayList<String> List6 = new ArrayList<>();
+    ArrayList<String> List7 = new ArrayList<>();
 
     private int position;
 
@@ -82,7 +96,6 @@ public class ContinueFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         myRef = FirebaseDatabase.getInstance().getReference("save");
 
     }
@@ -101,33 +114,25 @@ public class ContinueFragment extends Fragment {
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
                 ShowTableDate show = dataSnapshot.getValue(ShowTableDate.class);
                 myList.add(show);
                 arrayAdapter.notifyDataSetChanged();
                 checkEmpty();
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
             }
 
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
+            public void onChildRemoved(DataSnapshot dataSnapshot) { }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
 
-            }
-        });
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+          });
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -139,12 +144,16 @@ public class ContinueFragment extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snap : dataSnapshot.getChildren()) {
                             HashMap<String, Object> myHash = (HashMap<String, Object>) snap.getValue();
-
                             Log.e("TAG", String.valueOf( myHash.get("limiteCol")));
                             Log.e("TAG", String.valueOf( myHash.get("limiteTubo")));
                             List1.add(String.valueOf(myHash.get("limiteCol")));
                             List2.add(Integer.parseInt(String.valueOf(myHash.get("limiteTubo"))));
-
+                            //Firebase Child Parameters
+                            List3.add(String.valueOf(myHash.get("cliente1")));
+                            List4.add(String.valueOf(myHash.get("planta1")));
+                            List5.add(String.valueOf(myHash.get("zona1")));
+                            List6.add(String.valueOf(myHash.get("tipo1")));
+                            List7.add(String.valueOf(myHash.get("linea1")));
                         }
 
                         if(List1.size() < 0 && List2.size() < 0) {
@@ -155,11 +164,25 @@ public class ContinueFragment extends Fragment {
 
                             String limiteColumna = List1.get(position);
                             int limiteFila = List2.get(position);
+                            //
+                            String cliente1 = List3.get(position);
+                            String planta1 = List4.get(position);
+                            String zona1 = List5.get(position);
+                            String tipo1 = List6.get(position);
+                            String linea1 = List7.get(position);
                             Bundle bundle = new Bundle();
                             bundle.putString("LETRA", limiteColumna);
                             bundle.putInt("nTUBO", limiteFila);
 
-                            com.project.ignacio_rvf_bbf.bbf_reporter.MainFragment nmf = new com.project.ignacio_rvf_bbf.bbf_reporter.MainFragment();
+                            SharedPreferences sharedPref = getContext().getSharedPreferences(SHARED_PREF_CONTINUE, 0);
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString(KEY_VAL1, cliente1);
+                            editor.putString(KEY_VAL2, planta1);
+                            editor.putString(KEY_VAL3, zona1);
+                            editor.putString(KEY_VAL4, tipo1);
+                            editor.putString(KEY_VAL5, linea1);
+
+                            Main2Fragment nmf = new Main2Fragment();
                             nmf.setArguments(bundle);
                             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                             fragmentManager.beginTransaction().replace(R.id.main_content, nmf)

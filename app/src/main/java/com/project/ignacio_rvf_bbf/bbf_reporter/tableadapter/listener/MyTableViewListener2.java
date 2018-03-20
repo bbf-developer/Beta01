@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.evrencoskun.tableview.TableView;
 import com.evrencoskun.tableview.listener.ITableViewListener;
-import com.project.ignacio_rvf_bbf.bbf_reporter.model.CellModel;
 import com.project.ignacio_rvf_bbf.bbf_reporter.popup_medicion.PopupClickFragment;
+import com.project.ignacio_rvf_bbf.bbf_reporter.popup_medicion.PopupContinue;
 
 import java.util.Map;
 import java.util.Set;
@@ -23,7 +23,7 @@ import java.util.Set;
  * Created by Ignacio-RVF-BBF on 23/01/2018.
  */
 
-public class MyTableViewListener implements ITableViewListener{
+public class MyTableViewListener2 implements ITableViewListener{
 
     public final static String SHARED_PREF_NUM1="posicionCol";
     public final static String KEY_NUM1= "KEY_COL";
@@ -40,7 +40,7 @@ public class MyTableViewListener implements ITableViewListener{
     private String parseCol;
     private String parseFila;
 
-    public MyTableViewListener(TableView pTableView){
+    public MyTableViewListener2(TableView pTableView){
 
         this.mTableView = pTableView;
         this.ctxContext = pTableView.getContext();
@@ -55,33 +55,27 @@ public class MyTableViewListener implements ITableViewListener{
      * @param p_nYPosition : Y (Row) position of Clicked Cell item.
      */
 
-        @Override
-        public void onCellClicked (@NonNull RecyclerView.ViewHolder p_jCellView,int p_nXPosition,
-        int p_nYPosition){
-            //TODO: AQUI SE DEBE LEVANTAR EL POPUP INSTANCIANDO .SHOW();
-            pushFragment(ctxContext);
-            //LOS PARAMETROS SE DEBEN ALMACENAR Y ENVIAR AL FRAGMENTO PARA CONFIGURAR EL NOMBRE DE
-            //LA TABLA AL SELECCIONAR LA CELDA.
-            parseCol = String.valueOf(posCol = p_nXPosition);
-            //ALMACENA PARAMETRO INT PARA IMPRIMIR EL NUMERO DE LA CELDA SELECCIONADA.
-            parseFila = String.valueOf(posFila = p_nYPosition);
-            //SHARED PREFERENCES METHOD
-            SharedPreferences preferences = ctxContext.getSharedPreferences(SHARED_PREF_NUM1,0);
-            SharedPreferences.Editor editor = preferences.edit();
-            //EDITOR PUT INT PARA COLUMNAS
-            editor.putString(KEY_NUM1, parseCol );
-            editor.putString(KEY_NUM2, parseFila);
-            //EDITOR PUT INT PARA FILAS
-            editor.commit();
+    @Override
+    public void onCellClicked (@NonNull RecyclerView.ViewHolder p_jCellView,int p_nXPosition,
+                               int p_nYPosition){
+        //TODO: SE ALMACENAN LOS PARAMETROS DE POSICIONAMIENTO DE TABLA EN SHARED PREF.;
+        pushFragment(ctxContext);
 
-            /**
-             * Deberia captar los parametros de la medicion para ingresarlos a la celda clickeada
-             *
-             * */
-            //String strID = String.valueOf(p_nXPosition + p_nYPosition);
-            //String strText = "9.6";
-            //CellModel cell = new CellModel(strID, strText);
-        }
+        //LOS PARAMETROS SE DEBEN ALMACENAR Y ENVIAR AL FRAGMENTO PARA CONFIGURAR EL NOMBRE DE
+        //LA TABLA AL SELECCIONAR LA CELDA.
+        parseCol = String.valueOf(posCol = p_nXPosition);
+        //ALMACENA PARAMETRO INT PARA IMPRIMIR EL NUMERO DE LA CELDA SELECCIONADA.
+        parseFila = String.valueOf(posFila = p_nYPosition);
+
+        //SHARED PREFERENCES METHOD
+        SharedPreferences preferences = ctxContext.getSharedPreferences(SHARED_PREF_NUM1,0);
+        SharedPreferences.Editor editor = preferences.edit();
+        //EDITOR PUT INT PARA COLUMNAS
+        editor.putString(KEY_NUM1, parseCol );
+        editor.putString(KEY_NUM2, parseFila);
+        //EDITOR PUT INT PARA FILAS
+        editor.commit();
+    }
 
     /**
      * Called when user click any column header item.
@@ -139,10 +133,10 @@ public class MyTableViewListener implements ITableViewListener{
 
     public void pushFragment(Context context){
         FragmentManager fm = ((FragmentActivity)context).getSupportFragmentManager();
-        PopupClickFragment pcf = new PopupClickFragment();
+        PopupContinue pcf = new PopupContinue();
 
         pcf.show(fm, "");
-       // FragmentTransaction transaction = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
+        // FragmentTransaction transaction = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
 
     }
 

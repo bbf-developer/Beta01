@@ -97,21 +97,19 @@ public class SubHogarFragment extends Fragment {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long id) {
 
+                //GETTING ZONA NAME
+                //BUNDLE METHOD
+                SubChildInfo info = subdeptlist.get(childPosition);
+                Bundle bundle = new Bundle();
+                bundle.putString("KEY_ZONA",info.getName().toUpperCase() );
+
                 if(groupPosition == 0 && childPosition == 0){
                     NuevaMedicionFragment rpf = new NuevaMedicionFragment();
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    rpf.setArguments(bundle);
                     fragmentManager.beginTransaction().replace(R.id.main_content, rpf)
                             .commit();
                 }
-
-
-                //GETTING ZONA NAME
-                SubChildInfo info = subdeptlist.get(childPosition);
-
-                SharedPreferences sharedZona = getContext().getSharedPreferences(SHARED_PREF_ZONA,0);
-                SharedPreferences.Editor editor = sharedZona.edit();
-                editor.putString(KEY_TEXT_ZONA, info.getName().toUpperCase());
-                editor.commit();
 
                 return false;
             }

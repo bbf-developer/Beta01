@@ -13,7 +13,10 @@ public class MedicionTest {
        double valorNom;
        double espesor;
 
+       double precaucion;
+
        int proyeccion;
+
 
        int rowposition;
        int colposition;
@@ -22,13 +25,15 @@ public class MedicionTest {
         //VOID CONSTRUCTOR
     }
 
-    public MedicionTest(String medicionId, double medicion, double medicionAnt, double valorNom, double espesor, int proyeccion,
+    public MedicionTest(String medicionId, double medicion, double medicionAnt, double valorNom, double espesor, double precaucion, int proyeccion,
                         int rowposition, int colposition) {
+
         this.medicionId = medicionId;
         this.medicion = medicion;
         this.medicionAnt = medicionAnt;
         this.valorNom = valorNom;
         this.espesor = espesor;
+        this.precaucion = precaucion;
         this.proyeccion = proyeccion;
         this.rowposition = rowposition;
         this.colposition = colposition;
@@ -53,6 +58,8 @@ public class MedicionTest {
     public double getEspesor() {
         return espesor;
     }
+
+    public double getPrecaucion(){return precaucion; }
 
     public int getProyeccion() {
         return proyeccion;

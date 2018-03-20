@@ -9,9 +9,11 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -29,6 +31,8 @@ import com.project.ignacio_rvf_bbf.bbf_reporter.R;
 import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.MainAdminActivity;
 import com.project.ignacio_rvf_bbf.bbf_reporter.adminpanel.firebaseConnAdmin.UserAdd;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MainUserFragment#newInstance} factory method to
@@ -44,6 +48,10 @@ public class MainUserFragment extends Fragment {
     private Switch switcher;
 
     private String atribb;
+
+    private ListView myView;
+
+    ArrayList<UserAdd> myList = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -96,6 +104,7 @@ public class MainUserFragment extends Fragment {
         ePassword = view.findViewById(R.id.editPassword);
         addUser = view.findViewById(R.id.btnAdduser);
         switcher = view.findViewById(R.id.switchAtributo);
+        myView = view.findViewById(R.id.usersList);
 
         addUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,9 +127,66 @@ public class MainUserFragment extends Fragment {
             }
         });
 
+        final ArrayAdapter<UserAdd> array = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, myList);
+        myView.setAdapter(array);
+
+        myData.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                UserAdd user = dataSnapshot.getValue(UserAdd.class);
+                myList.add(user);
+                array.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                //UserAdd user= dataSnapshot.getValue(UserAdd.class);
+                //int index = getItemIndex(user);
+                //result.set(index, user);
+                //array.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                //UserAdd user = dataSnapshot.getValue(UserAdd.class);
+                //int index = getItemIndex(user);
+                //result.remove(index);
+                //array.notifyItemRemoved(index);
+
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
       return view;
     }
+
+        /*
+       @Override
+       public boolean onContextItemSelected(MenuItem item) {
+
+           switch(item.getItemId()){
+               case 0:
+                   removeCliente(item.getGroupId());
+                   break;
+               case 1:
+           }
+
+           return super.onContextItemSelected(item);
+       }
+   */
+
 
     private void registerUser(){
 

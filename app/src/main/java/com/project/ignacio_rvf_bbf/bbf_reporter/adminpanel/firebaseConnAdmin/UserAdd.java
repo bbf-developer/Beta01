@@ -36,4 +36,8 @@ public class UserAdd {
     public String getAtributo(){
         return atributo;
     }
+
+    public String toString(){
+        return mail.toString() + "   -   " + atributo.toString();
+    }
 }

@@ -1,6 +1,5 @@
 package com.project.ignacio_rvf_bbf.bbf_reporter;
 
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,6 +9,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -22,28 +23,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.project.ignacio_rvf_bbf.bbf_reporter.firebaseConn.infoAdapter.CreaMedicion;
-import com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowClienteFragment;
-import com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.ShowCliente;
-import com.project.ignacio_rvf_bbf.bbf_reporter.list.list_adapter.SubShowClienteFragment;
-import com.project.ignacio_rvf_bbf.bbf_reporter.popup_medicion.PopupClickFragment;
-
 import java.util.Calendar;
 
 import static com.project.ignacio_rvf_bbf.bbf_reporter.RepcalderaFrag.KEY_CALDERA;
+import static com.project.ignacio_rvf_bbf.bbf_reporter.RepcalderaFrag.KEY_CLIENTE;
+import static com.project.ignacio_rvf_bbf.bbf_reporter.RepcalderaFrag.KEY_LINEA;
+import static com.project.ignacio_rvf_bbf.bbf_reporter.RepcalderaFrag.KEY_PLANTA;
 import static com.project.ignacio_rvf_bbf.bbf_reporter.RepcalderaFrag.SHARED_PREFS_CALDERA;
-import static com.project.ignacio_rvf_bbf.bbf_reporter.SubHogarFragment.KEY_TEXT_ZONA;
-import static com.project.ignacio_rvf_bbf.bbf_reporter.SubHogarFragment.SHARED_PREF_ZONA;
-import static com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowClienteFragment.KEY_TEXT;
-import static com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowClienteFragment.SHARED_PREFS_FILE;
-import static com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowPlantaFragment.KEY_LINEA;
-import static com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowPlantaFragment.KEY_PLANTA;
-import static com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowPlantaFragment.SHARED_PREFS_LINEA;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,6 +41,13 @@ import static com.project.ignacio_rvf_bbf.bbf_reporter.list.ShowPlantaFragment.S
  * TABLA DE CONFIGURACION PARA MENÚ CALDERA
  */
 public class NuevaMedicionFragment extends Fragment {
+
+    public static final String SHARED_PREFS_POPUP_MAIN = "popupMain";
+    public static final String KEY_CALDERA1 ="KEY_CALDERA1";
+    public static final String KEY_CLIENTE1 ="KEY_CLIENTE1";
+    public static final String KEY_PLANTA1 ="KEY_PLANTA1";
+    public static final String KEY_ZONA1 ="KEY_ZONA1";
+    public static final String KEY_LINEA1 ="KEY_LINEA1";
 
     private Button button;
     private Context mContext;
@@ -89,16 +85,6 @@ public class NuevaMedicionFragment extends Fragment {
     private String zona;
     private String tipo;
     private String linea;
-
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     //TODO: Almacenar datos de reconfiguracion de tabla para continuar con el trabajo si es pausado.
     DatabaseReference databaseReference;
@@ -141,14 +127,14 @@ public class NuevaMedicionFragment extends Fragment {
     public static NuevaMedicionFragment newInstance(String param1, String param2) {
         NuevaMedicionFragment fragment = new NuevaMedicionFragment();
         return fragment;
-
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //GUARDAR PARAMETROS PARA SALVAR LA TABLA QUE SE CREO
+        zona = this.getArguments().getString("KEY_ZONA");
 
+        //GUARDAR PARAMETROS PARA SALVAR LA TABLA QUE SE CREO
         databaseReference = FirebaseDatabase.getInstance().getReference("save");
 
         //Asignacion de escritura en BBDD de fecha a la tabla.
@@ -168,6 +154,7 @@ public class NuevaMedicionFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_nueva_medicion, container, false);
+        getActivity().setTitle("Nueva Medición");
 
         button = (Button) view.findViewById(R.id.btnNew);
 
@@ -175,34 +162,73 @@ public class NuevaMedicionFragment extends Fragment {
         editFila = (EditText) view.findViewById(R.id.etxtFila);
         editCol2 = (EditText) view.findViewById(R.id.etxtCol2);
 
-        //MOSTRAR CLIENTE SELECCIONADO
-        muestraCliente = view.findViewById(R.id.textvCliente);
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS_FILE, 0);
-        cliente = sharedPreferences.getString(KEY_TEXT,"");
-        muestraCliente.setText(cliente);
+        editCol1.setFilters(new InputFilter[]{
+                new InputFilter() {
+                    @Override
+                    public CharSequence filter(CharSequence charset, int i, int i1, Spanned spanned, int i2, int i3) {
 
-        //MUESTRA PLANTA SELECCIONADA
-        muestraPlanta = view.findViewById(R.id.txtZona);
-        SharedPreferences sharedPreferences1 = getContext().getSharedPreferences(SHARED_PREFS_LINEA, 0);
-        planta = sharedPreferences1.getString(KEY_PLANTA,"");
-        muestraPlanta.setText(planta);
+                          if(charset.equals("")){
+                              return charset;
+                          }
+                          if(charset.toString().matches("[b-zB-Z]+")){
+                              return charset;
+                          }
 
-        //MUESTRA ZONA SELECCIONADA
-        muestraZona = view.findViewById(R.id.textvZona);
-        SharedPreferences sharedPreferences2 = getContext().getSharedPreferences(SHARED_PREF_ZONA,0);
-        zona = sharedPreferences2.getString(KEY_TEXT_ZONA,"");
-        muestraZona.setText(zona);
+                        return "";
+                    }
+                }
+        });
 
-        //MUESTRA TIPO SELECCION
-        muestraTipo = view.findViewById(R.id.textvTipo);
+        editFila.setFilters(new InputFilter[]{
+                new InputFilter() {
+                    @Override
+                    public CharSequence filter(CharSequence charset, int i, int i1, Spanned spanned, int i2, int i3) {
+
+                        if(charset.equals("")){
+                            return charset;
+                        }
+                        if(charset.toString().matches("[b-zB-Z]+")){
+                            return charset;
+                        }
+
+                        return "";
+                    }
+                }
+        });
+
+        editCol2.setFilters(new InputFilter[]{
+                new InputFilter() {
+                    @Override
+                    public CharSequence filter(CharSequence charset, int i, int i1, Spanned spanned, int i2, int i3) {
+
+                        if(charset.equals("")){
+                            return charset;
+                        }
+                        if(charset.toString().matches("[b-zB-Z]+")){
+                            return charset;
+                        }
+
+                        return "";
+                    }
+                }
+        });
+
+        //******************** RECEPCION DE PARAMETROS PARA EL POPUP **************
         SharedPreferences sharedPreferences3 = getContext().getSharedPreferences(SHARED_PREFS_CALDERA, 0);
         tipo = sharedPreferences3.getString(KEY_CALDERA, "");
+        muestraTipo = view.findViewById(R.id.textvTipo);
         muestraTipo.setText(tipo);
-
-        //MUESTRA LINEA SELECCIONADA
+        cliente = sharedPreferences3.getString(KEY_CLIENTE,"");
+        muestraCliente = view.findViewById(R.id.textvCliente);
+        muestraCliente.setText(cliente);
+        planta = sharedPreferences3.getString(KEY_PLANTA,"");
+        muestraPlanta = view.findViewById(R.id.txtZona);
+        muestraPlanta.setText(planta);
+        //*********************
+        muestraZona = view.findViewById(R.id.textvZona);
+        muestraZona.setText(zona);
+        linea = sharedPreferences3.getString(KEY_LINEA,"");
         muestraLinea = view.findViewById(R.id.textvLinea);
-        SharedPreferences sharedPreferences4 = getContext().getSharedPreferences(SHARED_PREFS_LINEA, 0);
-        linea = sharedPreferences4.getString(KEY_LINEA,"");
         muestraLinea.setText(linea);
 
         //PARAMETROS DE REFLEJO
@@ -211,7 +237,6 @@ public class NuevaMedicionFragment extends Fragment {
 
         //INGRESO DE NUMEROS DE TUBO A INSPECCIONAR.
         editTubo1 = view.findViewById(R.id.editTubo);
-
 
         //TODO: FALTA FILTRO DE INGRESO DE PARAMETROS.
         //Automatizar aparicion del item del inicio de la fila
@@ -240,8 +265,10 @@ public class NuevaMedicionFragment extends Fragment {
 
             // Toast.makeText(getContext(), "PARAMETROA" + " " +paramSize1,Toast.LENGTH_LONG).show();
 
-         }
-     });
+             }
+         });
+
+
 
         //Automatizar cambio de parametro del fin de la fila
         editFila.addTextChangedListener(new TextWatcher() {
@@ -266,57 +293,57 @@ public class NuevaMedicionFragment extends Fragment {
             }
         });
 
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                addTabla();
-
             }
-
         });
 
         return view;
     }
 
     public void addTabla(){
-
         String verificar = editTubo1.getText().toString();
-        //PARAMETROS DE CONFIG
-        String menu1 = caldera;
-        String cliente1= cliente;
-        String planta1 = planta;
-        String zona1 = zona;
-        String linea1 = linea;
-
         String limiteCol = String.valueOf(editCol2.getText().toString());
-
-        int limiteTubo = Integer.parseInt(verificar);
-
-        String getYear = year1;
-        String getMonth = month1;
-        String getDay = day1;
-
-        String id = databaseReference.push().getKey();
-
-        //SAVING CONFIGURATION PARAMETERS OF TABLE
-        CreaMedicion cm = new CreaMedicion(id,cliente1,planta1,zona1,limiteTubo, limiteCol, getYear, getMonth, getDay, linea1, menu1);
-        databaseReference.child(id).setValue(cm);
+        //String verfica2 = String.valueOf(editFila.getText().toString());
 
         if(!TextUtils.isEmpty(verificar) && !TextUtils.isEmpty(limiteCol)) {
+            //PARAMETROS DE CONFIG
+            String menu1 = caldera;
+            String cliente1= cliente;
+            String planta1 = planta;
+            String zona1 = zona;
+            String linea1 = linea;
+            int limiteTubo = Integer.parseInt(verificar);
+            String getYear = year1;
+            String getMonth = month1;
+            String getDay = day1;
+            String id = databaseReference.push().getKey();
+            //SAVING CONFIGURATION PARAMETERS OF TABLE
+            CreaMedicion cm = new CreaMedicion(id,cliente1,planta1,zona1,limiteTubo, limiteCol, getYear, getMonth, getDay, linea1, menu1);
+            databaseReference.child(id).setValue(cm);
+
             Bundle bundle = new Bundle();
             if (editTubo1 != null) {
                 nTubo = Integer.parseInt(editTubo1.getText().toString());
             }
             bundle.putInt("nTUBO", nTubo);
             bundle.putString("LETRA", String.valueOf(editCol2.getText().toString()));
-
             MainFragment nmf = new MainFragment();
             nmf.setArguments(bundle);
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.main_content, nmf)
                     .commit();
+
+            SharedPreferences sharedPrefs = getContext().getSharedPreferences(SHARED_PREFS_POPUP_MAIN, 0);
+            SharedPreferences.Editor editor = sharedPrefs.edit();
+            editor.putString(KEY_CALDERA1, tipo);
+            editor.putString(KEY_CLIENTE1, cliente1);
+            editor.putString(KEY_PLANTA1, planta1);
+            editor.putString(KEY_ZONA1, zona1);
+            editor.putString(KEY_LINEA1, linea1);
+            editor.commit();
 
         }else{
             Toast.makeText(getContext(), "Faltan Parametros", Toast.LENGTH_SHORT).show();

@@ -13,7 +13,7 @@
     <RelativeLayout
         android:id="@+id/relative"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="400dp">
 
         <TextView
             android:id="@+id/putCellName"
@@ -42,7 +42,7 @@
             android:layout_alignBaseline="@+id/tvMedicion"
             android:layout_alignBottom="@+id/tvMedicion"
             android:layout_alignStart="@+id/etValorNom"
-            android:hint="0.00"
+            android:hint="0"
             android:inputType="numberDecimal" />
 
         <TextView
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/tvMedicionAnt"
             android:inputType="numberDecimal"
-            android:hint="0.00"
+            android:hint="0"
             android:layout_alignStart="@+id/etMedicion" />
 
 
@@ -72,7 +72,6 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="200dp"
             android:text="Valor Nominal"
-
             />
 
         <EditText
@@ -82,8 +81,9 @@
             android:layout_alignBottom="@+id/tvValorNom"
             android:layout_marginLeft="115dp"
             android:inputType="numberDecimal"
-            android:hint="0.00"
+            android:hint="0"
             android:layout_toRightOf="@id/tvValorNom" />
+
 
         <TextView
             android:id="@+id/tvEspesor"
@@ -102,7 +102,7 @@
             android:layout_alignBottom="@id/tvEspesor"
             android:layout_marginLeft="96dp"
             android:inputType="numberDecimal"
-            android:hint="0.00"
+            android:hint="0"
             android:layout_toRightOf="@id/tvEspesor" />
 
         <TextView
@@ -148,6 +148,26 @@
             android:layout_marginStart="15dp"
             android:text="1"
             android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/textView38"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tvProyeccion"
+            android:layout_below="@+id/tvProyeccion"
+            android:layout_marginTop="27dp"
+            android:text="Espesor de precaución" />
+
+        <EditText
+            android:id="@+id/etPrecaucion"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView38"
+            android:layout_alignBottom="@+id/textView38"
+            android:layout_alignStart="@+id/etProyeccion"
+            android:hint="0"
+            android:inputType="numberDecimal"
+            android:maxLength="1" />
 
     </RelativeLayout>
 

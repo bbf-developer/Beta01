@@ -119,14 +119,13 @@ public class ShowClienteFragment extends Fragment {
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
            //IMPLEMENTAR METODO SHARED PREFERENCES
             ShowCliente select = myList.get(i);
-            //bundle.putString();
-            SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS_FILE, 0);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(KEY_TEXT, select.getRazonsoc().toUpperCase());
-            editor.commit();
+
+            Bundle bundle = new Bundle();
+            bundle.putString("KEY_CLIENTE", select.getRazonsoc().toUpperCase());
 
             ShowPlantaFragment rpf = new ShowPlantaFragment();
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            rpf.setArguments(bundle);
             fragmentManager.beginTransaction().replace(R.id.main_content, rpf)
                     .commit();
         }
